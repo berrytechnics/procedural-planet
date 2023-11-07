@@ -1,12 +1,12 @@
 import { useEffect, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import Terrain from "./Terrain";
+import Terrain from "../Terrain";
 
-/* eslint-disable react/no-unknown-property */
 export default function Planet(props: {
   radius: number;
   detail: number;
   color?: string;
+  ocean?: boolean;
   fbmOpts?: any;
   perlinOpts?: { scale?: number; amplitude?: number }[];
 }) {
@@ -32,12 +32,14 @@ export default function Planet(props: {
         <icosahedronGeometry args={[props.radius, props.detail]} />
         <meshStandardMaterial color={props.color} />
       </mesh>
-      <mesh>
-        <sphereGeometry
-          args={[props.radius, props.detail / 2, props.detail / 2]}
-        />
-        <meshStandardMaterial opacity={0.8} transparent color="#224488" />
-      </mesh>
+      {props.ocean && (
+        <mesh>
+          <sphereGeometry
+            args={[props.radius, props.detail / 2, props.detail / 2]}
+          />
+          <meshStandardMaterial opacity={0.8} transparent color="#224488" />
+        </mesh>
+      )}
     </group>
   );
 }
