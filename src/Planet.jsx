@@ -32,8 +32,8 @@ export default function Planet ()
             <meshStandardMaterial color={ 'grey' } />
         </mesh>
         <mesh>
-            <sphereGeometry args={ [ 64.3, 24, 24 ] } />
-            <meshStandardMaterial color="#224488" />
+            <sphereGeometry args={ [ 64.2, 64, 64 ] } />
+            <meshStandardMaterial opacity={ .8 } transparent color="#224488" />
         </mesh>
     </group>
 }
