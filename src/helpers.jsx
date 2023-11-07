@@ -1,6 +1,15 @@
 import { Perlin, FBM } from 'three-noise';
 import { Vector2, Vector3 } from 'three';
 const perlin = new Perlin( Math.random() );
+const defaultOptions = {
+    seed: Math.random(),
+    amplitude: 1,
+    scale: 3,
+    octaves: 12,
+    persistance: .2,
+    lacunarity: 3,
+    redistribution: 3
+}
 export default {
     generatePerlinTerrain: ( meshRef, amplitude = 1, scale = 30 ) =>
     {
@@ -29,15 +38,7 @@ export default {
         position.needsUpdate = true;
         geometry.computeVertexNormals();
     },
-    generateFBMTerrian: ( meshRef, options = {
-        seed: Math.random(),
-        amplitude: 1,
-        scale: 50,
-        octaves: 4,
-        persistance: 0.5,
-        lacunarity: 1,
-        redistribution: 1
-    } ) =>
+    generateFBMTerrian: ( meshRef, options = defaultOptions ) =>
     {
         const noise = new FBM( options );
         const { geometry } = meshRef.current;
@@ -54,15 +55,7 @@ export default {
         geometry.computeVertexNormals();
 
     },
-    generateFBM3DTerrian: ( meshRef, options = {
-        seed: Math.random(),
-        amplitude: 1,
-        scale: 50,
-        octaves: 4,
-        persistance: 0.5,
-        lacunarity: 1,
-        redistribution: 1
-    } ) =>
+    generateFBM3DTerrian: ( meshRef, options = defaultOptions ) =>
     {
         const noise = new FBM( options );
         const { geometry } = meshRef.current;
@@ -71,7 +64,7 @@ export default {
             const noiseVal = noise.get3( new Vector3( position.array[ i ], position.array[ i + 1 ], position.array[ i + 2 ] ) );
             const vector = new Vector3( position.array[ i ], position.array[ i + 1 ], position.array[ i + 2 ] );
             const direction = vector.clone().normalize();
-            const newVector = vector.clone().addScaledVector( direction, noiseVal * options.amplitude );
+            const newVector = vector.clone().addScaledVector( direction, noiseVal );
             position.array[ i ] = newVector.x;
             position.array[ i + 1 ] = newVector.y;
             position.array[ i + 2 ] = newVector.z;

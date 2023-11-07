@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unknown-property */
-import { Canvas } from '@react-three/fiber'
+import { Canvas, } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei';
 import Planet from './Planet';
 function App ()
