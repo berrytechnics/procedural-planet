@@ -1,14 +1,24 @@
 /* eslint-disable react/no-unknown-property */
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
+import GUI from 'lil-gui';
 import Planet from "./Planet";
+import { useState } from "react";
+
+const gui = new GUI();
 function App() {
+  const [canvasSize, setCanvasSize] = useState([
+    window.innerWidth,
+    window.innerHeight,
+  ]);
+  window.addEventListener("resize", () => {
+    setCanvasSize([window.innerWidth, window.innerHeight]);
+  });
   return (
-    <div style={{ width: window.innerWidth, height: window.innerHeight }}>
-      <Canvas
-        camera={{ position: [0, 100, 250] }}
-        style={{ height: window.innerHeight, width: window.innerWidth }}
-      >
+    <div
+      style={{ width: canvasSize[0], height: canvasSize[1] }}
+    >
+      <Canvas camera={{ position: [0, 100, 250] }}>
         <directionalLight
           color="#f48037"
           intensity={0.6}
@@ -34,6 +44,7 @@ function App() {
             lacunarity: 10,
             redistribution: 4,
           }}
+          gui={gui}
         />
       </Canvas>
     </div>
