@@ -25,7 +25,7 @@ export default function Planet(props: {
     {
       props.fbmOpts && Terrain.generateFBM3DTerrian(planetRef, props.fbmOpts);
     }
-    // Terrain.generateTerrainColor(planetRef);
+    Terrain.generateTerrainColor(planetRef);
   }, []);
   return (
     <group ref={groupRef}>

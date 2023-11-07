@@ -1,6 +1,7 @@
 import { Perlin, FBM } from "three-noise";
-import { Color, Vector2, Vector3 } from "three";
+import { BufferAttribute, Color, Vector2, Vector3 } from "three";
 import { Face } from "three/examples/jsm/Addons.js";
+import { color } from "three/examples/jsm/nodes/Nodes.js";
 const perlin = new Perlin(Math.random());
 const defaultOptions = {
   seed: Math.random(),
@@ -100,31 +101,34 @@ export default {
     geometry.computeVertexNormals();
   },
   generateTerrainColor: (meshRef: any) => {
-    const faceIndices = ["a", "b", "c", "d"];
     const { geometry } = meshRef.current;
+    const { position } = geometry.attributes;
+    const colorMatrix = [];
     // first, assign colors to vertices as desired
-    for (let i = 0; i < geometry.vertices.length; i++) {
+    for (let i = 0; i < position.array.length; i += 3) {
       const size = 100;
-      const point = geometry.vertices[i];
+      const point = new Vector3(
+        position.array[i],
+        position.array[i + 1],
+        position.array[i + 2]
+      );
       const color = new Color(0xffffff);
       color.setRGB(
         0.5 + point.x / size,
         0.5 + point.y / size,
         0.5 + point.z / size
       );
-      geometry.colors[i] = color; // use this array for convenience
+      colorMatrix[i] = [color.r, color.g, color.b];
+      colorMatrix[i + 1] = [color.r, color.g, color.b];
+      colorMatrix[i + 2] = [color.r, color.g, color.b];
     }
-    // copy the colors to corresponding positions
-    //     in each face's vertexColors array.
-    for (let i = 0; i < geometry.faces.length; i++) {
-      const face = geometry.faces[i];
-      const numberOfSides = face instanceof Face ? 3 : 4;
-      for (let j = 0; j < numberOfSides; j++) {
-        const vertexIndex = face[faceIndices[j]];
-        face.vertexColors[j] = geometry.colors[vertexIndex];
-      }
-    }
+    const colorBuffer = new BufferAttribute(
+      new Float32Array(colorMatrix),
+      3
+    );
+    geometry.setAttribute("color", colorBuffer);
     geometry.colorsNeedUpdate = true;
+    console.log(colorMatrix);
     return;
   },
 };
