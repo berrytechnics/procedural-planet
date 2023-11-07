@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { DoubleSide } from 'three'
-import Terrain from '../Terrain';
+import Terrain from './Terrain';
 
 const AMPLITUDE = 10;
 

@@ -11,7 +11,7 @@ const defaultOptions = {
     redistribution: 3
 }
 export default {
-    generatePerlinTerrain: ( meshRef, amplitude = 1, scale = 30 ) =>
+    generatePerlinTerrain: ( meshRef:any, amplitude = 1, scale = 30 ) =>
     {
         const { geometry } = meshRef.current;
         const { position } = geometry.attributes;
@@ -22,7 +22,7 @@ export default {
         position.needsUpdate = true;
         geometry.computeVertexNormals();
     },
-    generate3DPerlinTerrain: ( meshRef, amplitude = 1, scale = 30 ) =>
+    generate3DPerlinTerrain: ( meshRef:any, amplitude = 1, scale = 30 ) =>
     {
         const { geometry } = meshRef.current;
         const { position } = geometry.attributes;
@@ -38,7 +38,7 @@ export default {
         position.needsUpdate = true;
         geometry.computeVertexNormals();
     },
-    generateFBMTerrian: ( meshRef, options = defaultOptions ) =>
+    generateFBMTerrian: ( meshRef:any, options = defaultOptions ) =>
     {
         const noise = new FBM( options );
         const { geometry } = meshRef.current;
@@ -55,7 +55,7 @@ export default {
         geometry.computeVertexNormals();
 
     },
-    generateFBM3DTerrian: ( meshRef, options = defaultOptions ) =>
+    generateFBM3DTerrian: ( meshRef:any, options = defaultOptions ) =>
     {
         const noise = new FBM( options );
         const { geometry } = meshRef.current;
@@ -74,4 +74,7 @@ export default {
         geometry.computeVertexNormals();
 
     },
+    generateTerrainColor: (meshRef:any) => {
+        return;
+    }
 }
