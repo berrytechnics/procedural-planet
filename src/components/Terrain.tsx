@@ -119,20 +119,20 @@ const Terrain = {
 				1,
 			);
 
+			// water
 			if (colorValue < 0.55) {
-				// water
 				color = new Color("blue");
-			} else if (colorValue < 0.57) {
 				// sand
+			} else if (colorValue < 0.56) {
 				color = new Color("sandybrown");
-			} else if (colorValue < 0.65) {
 				// grass
+			} else if (colorValue < 0.85) {
 				color = new Color("green");
-			} else if (colorValue < 0.98) {
 				// stone
+			} else if (colorValue < 0.94) {
 				color = new Color("grey");
-			} else {
 				// snow
+			} else {
 				color = new Color("white");
 			}
 
