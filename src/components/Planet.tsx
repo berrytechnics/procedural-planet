@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import { useFrame } from "@react-three/fiber";
 import Terrain from "./Terrain";
 
 export default function Planet(props: {
