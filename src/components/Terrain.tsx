@@ -130,11 +130,22 @@ const Terrain = {
       );
 
       if (colorValue < 0) {
-        color = new Color("sandybrown");
+        color = new Color("#C2B280");
       } else if (colorValue < 50) {
-        color = new Color("green");
+        let randColor = "#";
+        // const letters = "0123456789ABCDEF";
+        const letters = "5678";
+        for (let i = 0; i < 6; i++) {
+          if ([2, 3].includes(i)) {
+            randColor += letters[Math.floor(Math.random() * letters.length)];
+            continue;
+          }
+          randColor += "1";
+        }
+        color = new Color(randColor);
       } else if (colorValue < 85 && colorValue < 85.5) {
-        color = new Color("grey");
+        const rV = Terrain.map_range(Math.random(), 0, 1, 0.2, 0.3);
+        color = new Color(rV, rV, rV);
       } else {
         color = new Color("white");
       }

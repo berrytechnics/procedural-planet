@@ -39,7 +39,7 @@ export default function Planet(props: {
           <sphereGeometry
             args={[props.radius, props.detail / 2, props.detail / 2]}
           />
-          <meshPhongMaterial opacity={0.8} transparent color="#224488" />
+          <meshPhongMaterial opacity={0.8} transparent color="#064273" />
         </mesh>
       )}
     </group>

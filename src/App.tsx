@@ -16,16 +16,16 @@ function App() {
       <Canvas camera={{ position: [0, 0, 75], near: 1, far: 1000 }}>
         <directionalLight
           color="#ffffff"
-          intensity={2}
+          intensity={1}
           position={[-100, 100, 80]}
         />
-        <ambientLight intensity={0.5} />
+        <ambientLight intensity={0.2} />
         <OrbitControls />
         <Planet
           ocean="enabled"
           radius={32}
           detail={128}
-          color={"grey"}
+          color={"white"}
           fbmOpts={{
             seed: Math.random(),
             amplitude: 0.5,
