@@ -19,10 +19,10 @@ function App() {
 					intensity={2}
 					position={[-100, 100, 80]}
 				/>
-				<ambientLight intensity={0.1} />
+				<ambientLight intensity={0.5} />
 				<OrbitControls />
 				<Planet
-					// ocean
+					ocean
 					radius={16}
 					detail={128}
 					color={"grey"}
@@ -41,7 +41,7 @@ function App() {
 						{ scale: 0.01, amplitude: 2 },
 					]}
 				/>
-				<Stars speed={0.05} />
+				{/* <Stars speed={0.05} /> */}
 			</Canvas>
 		</div>
 	);

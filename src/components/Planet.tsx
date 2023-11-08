@@ -36,7 +36,7 @@ export default function Planet(props: {
 			{props.ocean && (
 				<mesh>
 					<sphereGeometry
-						args={[props.radius, props.detail / 2, props.detail / 2]}
+						args={[props.radius*1.02, props.detail / 2, props.detail / 2]}
 					/>
 					<meshStandardMaterial opacity={0.8} transparent color="#224488" />
 				</mesh>
