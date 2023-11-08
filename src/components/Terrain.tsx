@@ -102,7 +102,7 @@ const Terrain = {
     geometry.computeBoundingSphere();
 
     // Center the ocean on the planet.
-    if (oceanRef) {
+    if (oceanRef.current) {
       oceanRef.current.position.set(
         geometry.boundingSphere.center.x,
         geometry.boundingSphere.center.y,

@@ -22,7 +22,7 @@ function App() {
         <ambientLight intensity={0.5} />
         <OrbitControls />
         <Planet
-          ocean="disabled"
+          ocean="enabled"
           radius={16}
           detail={64}
           color={"grey"}
