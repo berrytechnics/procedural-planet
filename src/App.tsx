@@ -3,6 +3,7 @@ import { OrbitControls, PointerLockControls, Stars } from "@react-three/drei";
 import Planet from "./components/Planet";
 import { Physics, RigidBody } from "@react-three/rapier";
 import { Suspense, useRef, useState } from "react";
+import { Euler } from "three";
 
 function App() {
   const earthRef = useRef<any>();
@@ -24,10 +25,10 @@ function App() {
           />
           <ambientLight intensity={0.2} />
           <Physics gravity={[0, 0, 0]}>
-            <RigidBody angularVelocity={[0,.001,0]}>
+            <RigidBody angularVelocity={[0, 0.5, 0]} linearVelocity={[0, 0, 0]}>
               <Planet
                 name="Earth"
-                onInit={ref=>earthRef.current=ref}
+                onInit={(ref) => (earthRef.current = ref)}
                 ocean="enabled"
                 radius={32}
                 detail={128}
