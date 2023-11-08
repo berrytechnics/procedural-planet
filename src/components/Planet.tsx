@@ -32,14 +32,14 @@ export default function Planet(props: {
     <group ref={groupRef}>
       <mesh ref={planetRef}>
         <icosahedronGeometry args={[props.radius, props.detail]} />
-        <meshStandardMaterial vertexColors color={props.color} />
+        <meshPhongMaterial shininess={0.2} vertexColors color={props.color} />
       </mesh>
-      {props.ocean === 'enabled' && (
+      {props.ocean === "enabled" && (
         <mesh ref={oceanRef}>
           <sphereGeometry
             args={[props.radius, props.detail / 2, props.detail / 2]}
           />
-          <meshStandardMaterial opacity={0.8} transparent color="#224488" />
+          <meshPhongMaterial opacity={0.8} transparent color="#224488" />
         </mesh>
       )}
     </group>

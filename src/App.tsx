@@ -24,7 +24,7 @@ function App() {
         <Planet
           ocean="enabled"
           radius={32}
-          detail={256}
+          detail={128}
           color={"grey"}
           fbmOpts={{
             seed: Math.random(),
