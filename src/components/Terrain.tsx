@@ -1,6 +1,5 @@
 import { Perlin, FBM } from "three-noise";
 import { BufferAttribute, Color, Vector2, Vector3 } from "three";
-import { useRef } from "react";
 const perlin = new Perlin(Math.random());
 const defaultOptions = {
   seed: Math.random(),
