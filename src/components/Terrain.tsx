@@ -133,7 +133,6 @@ const Terrain = {
         color = new Color("#C2B280");
       } else if (colorValue < 50) {
         let randColor = "#";
-        // const letters = "0123456789ABCDEF";
         const letters = "5678";
         for (let i = 0; i < 6; i++) {
           if ([2, 3].includes(i)) {

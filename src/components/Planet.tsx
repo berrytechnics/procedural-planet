@@ -3,19 +3,18 @@ import { useFrame } from "@react-three/fiber";
 import Terrain from "./Terrain";
 
 export default function Planet(props: {
+  name?: string;
   radius: number;
   detail: number;
   color?: string;
   ocean?: "enabled" | "disabled";
   fbmOpts?: any;
   perlinOpts?: { scale?: number; amplitude?: number }[];
+  onInit?: (ref: any) => void;
 }) {
   const groupRef = useRef<any>();
   const planetRef = useRef<any>();
   const oceanRef = useRef<any>();
-  useFrame(() => {
-    groupRef.current.rotation.y += 0.001;
-  });
   useEffect(() => {
     {
       props.perlinOpts &&
@@ -27,15 +26,22 @@ export default function Planet(props: {
       props.fbmOpts && Terrain.generateFBM3DTerrian(planetRef, props.fbmOpts);
     }
     Terrain.generateTerrainColor(planetRef, oceanRef);
+    props.onInit?.(groupRef);
   }, []);
   return (
-    <group ref={groupRef}>
-      <mesh ref={planetRef}>
+    <group name={props.name ? `${props.name}_group` : undefined} ref={groupRef}>
+      <mesh
+        name={props.name ? `${props.name}_planet` : undefined}
+        ref={planetRef}
+      >
         <icosahedronGeometry args={[props.radius, props.detail]} />
         <meshPhongMaterial shininess={0.2} vertexColors color={props.color} />
       </mesh>
       {props.ocean === "enabled" && (
-        <mesh ref={oceanRef}>
+        <mesh
+          name={props.name ? `${props.name}_ocean` : undefined}
+          ref={oceanRef}
+        >
           <sphereGeometry
             args={[props.radius, props.detail / 2, props.detail / 2]}
           />
