@@ -23,8 +23,8 @@ function App() {
         <OrbitControls />
         <Planet
           ocean="enabled"
-          radius={16}
-          detail={64}
+          radius={32}
+          detail={256}
           color={"grey"}
           fbmOpts={{
             seed: Math.random(),
