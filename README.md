@@ -1,6 +1,6 @@
 # Procedurally Generated Planetary Body
 
-## [DEMO](https://sol2-silk.vercel.app/)
+## [DEMO](https://procedural-planet.vercel.app/)
 
 This is the beginning of a galaxy-scale webGL-based space game. The `Planet` component will generate a procedural world with terrain, color and, optionally, an ocean.
 
