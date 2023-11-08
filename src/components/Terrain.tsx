@@ -130,13 +130,11 @@ const Terrain = {
         100
       );
 
-    //   console.log(colorValue);
       if (colorValue < 0) {
-        // should be bedrock to just above the ocean on coasts.
         color = new Color("sandybrown");
       } else if (colorValue < 50) {
         color = new Color("green");
-      } else if (colorValue < 85) {
+      } else if (colorValue < 85 && colorValue < 85.5) {
         color = new Color("grey");
       } else {
         color = new Color("white");
