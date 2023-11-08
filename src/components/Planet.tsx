@@ -6,7 +6,7 @@ export default function Planet(props: {
   radius: number;
   detail: number;
   color?: string;
-  ocean?: boolean;
+  ocean?: "enabled" | "disabled";
   fbmOpts?: any;
   perlinOpts?: { scale?: number; amplitude?: number }[];
 }) {
