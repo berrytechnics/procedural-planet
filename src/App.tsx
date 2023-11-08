@@ -23,7 +23,7 @@ function App() {
 				<OrbitControls />
 				<Planet
 					ocean
-					radius={16}
+					radius={32}
 					detail={128}
 					color={"grey"}
 					fbmOpts={{

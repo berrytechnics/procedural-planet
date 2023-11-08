@@ -1,5 +1,6 @@
 import { Perlin, FBM } from "three-noise";
 import { BufferAttribute, Color, Vector2, Vector3 } from "three";
+import { useRef } from "react";
 const perlin = new Perlin(Math.random());
 const defaultOptions = {
   seed: Math.random(),
@@ -96,10 +97,20 @@ const Terrain = {
     position.needsUpdate = true;
     geometry.computeVertexNormals();
   },
-  generateTerrainColor: (meshRef: any) => {
+  generateTerrainColor: (meshRef: any, oceanRef?: any) => {
     const { geometry } = meshRef.current;
     const { position } = geometry.attributes;
     geometry.computeBoundingSphere();
+
+    // Center the ocean on the planet.
+    if (oceanRef) {
+      oceanRef.current.position.set(
+        geometry.boundingSphere.center.x,
+        geometry.boundingSphere.center.y,
+        geometry.boundingSphere.center.z
+      );
+      oceanRef.current.position.needsUpdate = true;
+    }
 
     const colorMatrix = new Float32Array(position.array.length);
 
@@ -113,22 +124,20 @@ const Terrain = {
       const altitude = point.distanceTo(geometry.boundingSphere.center);
       const colorValue = Terrain.map_range(
         altitude,
-        0,
+        geometry.parameters.radius,
         geometry.boundingSphere.radius,
         0,
         100
       );
 
-      // sand
-      if (colorValue < 94.9) {
+    //   console.log(colorValue);
+      if (colorValue < 0) {
+        // should be bedrock to just above the ocean on coasts.
         color = new Color("sandybrown");
-        // grass
-      } else if (colorValue < 97) {
+      } else if (colorValue < 50) {
         color = new Color("green");
-        // stone
-      } else if (colorValue < 98) {
+      } else if (colorValue < 85) {
         color = new Color("grey");
-        // snow
       } else {
         color = new Color("white");
       }
