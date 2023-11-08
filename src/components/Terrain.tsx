@@ -102,9 +102,7 @@ const Terrain = {
 		geometry.computeBoundingSphere();
 
 		const colorMatrix = new Float32Array(position.array.length);
-		console.log(geometry.boundingSphere);
 
-		// First, assign colors to vertices as desired
 		for (let i = 0; i < position.array.length; i += 3) {
 			const point = new Vector3(
 				position.array[i],
