@@ -109,7 +109,7 @@ const Terrain = {
 				position.array[i + 1],
 				position.array[i + 2],
 			);
-			const color = new Color(0xffffff);
+			let color;
 			let altitude = point.distanceTo(geometry.boundingSphere.center);
 			let colorValue = Terrain.map_range(
 				altitude,
@@ -118,7 +118,23 @@ const Terrain = {
 				0,
 				1,
 			);
-			color.setRGB(colorValue, colorValue, colorValue);
+
+			if (colorValue < 0.55) {
+				// water
+				color = new Color("blue");
+			} else if (colorValue < 0.57) {
+				// sand
+				color = new Color("sandybrown");
+			} else if (colorValue < 0.65) {
+				// grass
+				color = new Color("green");
+			} else if (colorValue < 0.98) {
+				// stone
+				color = new Color("grey");
+			} else {
+				// snow
+				color = new Color("white");
+			}
 
 			colorMatrix[i] = color.r;
 			colorMatrix[i + 1] = color.g;
