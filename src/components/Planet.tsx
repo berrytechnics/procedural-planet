@@ -24,7 +24,7 @@ export default function Planet(props: {
     {
       props.fbmOpts && Terrain.generateFBM3DTerrian(planetRef, props.fbmOpts);
     }
-    Terrain.generateTerrainColor(planetRef, oceanRef);
+    Terrain.generate3DTerrainColor(planetRef, oceanRef);
     props.onInit?.(groupRef);
   }, []);
   return (
@@ -44,7 +44,7 @@ export default function Planet(props: {
           <sphereGeometry
             args={[props.radius, props.detail / 2, props.detail / 2]}
           />
-          <meshPhongMaterial opacity={0.8} transparent color="#064273" />
+          <meshPhongMaterial opacity={0.95} transparent color="#064273" />
         </mesh>
       )}
     </group>

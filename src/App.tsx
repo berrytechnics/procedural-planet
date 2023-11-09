@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls, Stars } from "@react-three/drei";
+import { OrbitControls } from "@react-three/drei";
 import Planet from "./components/Planet";
 import { Physics, RigidBody } from "@react-three/rapier";
 import { Suspense, useRef, useState } from "react";
@@ -15,7 +15,7 @@ function App() {
   });
   return (
     <div style={{ width: canvasSize[0], height: canvasSize[1] }}>
-      <Canvas camera={{ position: [0, 0, 75], near: 1, far: 1000 }}>
+      <Canvas camera={{ position: [0, 0, 150], near: 1, far: 1000 }}>
         <Suspense>
           <directionalLight
             color="#ffffff"
@@ -29,7 +29,7 @@ function App() {
                 name="Earth"
                 onInit={(ref) => (earthRef.current = ref)}
                 ocean="enabled"
-                radius={32}
+                radius={64}
                 detail={128}
                 color={"white"}
                 fbmOpts={{
@@ -42,13 +42,13 @@ function App() {
                   redistribution: 2,
                 }}
                 perlinOpts={[
+                  { scale: 5, amplitude: 40 },
                   { scale: 1, amplitude: 10 },
-                  { scale: 0.01, amplitude: 2 },
                 ]}
               />
             </RigidBody>
           </Physics>
-          <Stars speed={0.05} />
+          {/* <Stars speed={0.02} /> */}
           <OrbitControls />
           {/* <PointerLockControls /> */}
         </Suspense>
