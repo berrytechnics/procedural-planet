@@ -1,83 +1,77 @@
-import { Canvas } from "@react-three/fiber";
+import { useFrame } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import Planet from "./components/Planet";
-import { Physics, RigidBody } from "@react-three/rapier";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 import { Vector3 } from "three";
+import { Bodies } from "./components/Bodies";
 
 function App() {
-  const planet = {
-    name: "earth",
-    // onInit: (ref: any) => (sunRef.current = ref),
-    ocean: "enabled",
-    radius: 16,
-    detail: 64,
-    color: "white",
-    fbmOpts: {
-      amplitude: 0.5,
-      scale: 0.2,
-      octaves: 24,
-      persistance: 0.1,
-      lacunarity: 5,
-      redistribution: 2,
-    },
-    perlinOpts: [
-      { scale: 5, amplitude: 40 },
-      { scale: 1, amplitude: 10 },
-    ],
-  };
-  
   const planets = [
-    planet,
-    planet,
-    planet,
-    planet,
-    planet,
-    planet,
-    planet,
-    planet,
-    planet,
-    planet,
-    planet,
-    planet,
+    {
+      name: "earth",
+      ocean: "enabled",
+      radius: 16,
+      mass: 1,
+      detail: 64,
+      color: "white",
+      initialVelocity: new Vector3(0, 0, 0),
+      position: new Vector3(0, 0, 0),
+      fbmOpts: {
+        amplitude: 0.5,
+        scale: 0.2,
+        octaves: 24,
+        persistance: 0.1,
+        lacunarity: 5,
+        redistribution: 2,
+      },
+      perlinOpts: [
+        { scale: 15, amplitude: 2},
+        { scale: 40, amplitude: .5},
+      ],
+    },
+    {
+      name: "earth2",
+      ocean: "enabled",
+      mass: 1,
+      radius: 16,
+      detail: 64,
+      color: "white",
+      initialVelocity: new Vector3(0, 0, 0),
+      position: new Vector3(100, 0, 0),
+      fbmOpts: {
+        amplitude: 0.5,
+        scale: 0.2,
+        octaves: 24,
+        persistance: 0.1,
+        lacunarity: 5,
+        redistribution: 2,
+      },
+      perlinOpts: [
+        { scale: 15, amplitude: 2},
+        { scale: 40, amplitude: .5},
+      ],
+    },
   ];
-  const [canvasSize, setCanvasSize] = useState([
-    window.innerWidth,
-    window.innerHeight,
-  ]);
-  window.addEventListener("resize", () => {
-    setCanvasSize([window.innerWidth, window.innerHeight]);
-  });
+  useFrame((_, delta) => Bodies.tick(delta));
   return (
-    <div style={{ width: canvasSize[0], height: canvasSize[1] }}>
-      <Canvas camera={{ position: [0, 0, 150], near: 1, far: 1000000 }}>
-        <Suspense>
-          <directionalLight
-            color="#ffffff"
-            intensity={1}
-            position={[-100, 100, 80]}
-          />
-          <ambientLight intensity={0.2} />
-          <Physics gravity={[0, 0, 0]}>
-            {planets.map((planet, i) => {
-              const position = new Vector3(i * 50, 0, 0);
-              return (
-                <RigidBody
-                  position={position}
-                  angularVelocity={[0, 0, 0]}
-                  linearVelocity={[0, 0, 0]}
-                >
-                  <Planet {...planet} />
-                </RigidBody>
-              );
-            })}
-          </Physics>
-          {/* <Stars speed={0.02} /> */}
-          <OrbitControls />
-          {/* <PointerLockControls /> */}
-        </Suspense>
-      </Canvas>
-    </div>
+    <Suspense>
+      <directionalLight
+        color="#ffffff"
+        intensity={1}
+        position={[-100, 100, 80]}
+      />
+      <ambientLight intensity={0.2} />
+      {planets.map((planet, i) => (
+        <Planet
+          key={i}
+          {...planet}
+          last={i + 1 === planets.length ? true : false}
+        />
+      ))}
+      {/* <Stars speed={0.02} /> */}
+      <OrbitControls />
+      {/* <PointerLockControls /> */}
+    </Suspense>
   );
 }
 
