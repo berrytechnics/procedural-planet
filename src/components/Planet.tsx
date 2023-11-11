@@ -8,7 +8,7 @@ export default function Planet(props: {
   radius: number;
   detail: number;
   color?: string;
-  ocean?: "enabled" | "disabled";
+  ocean?: string;
   fbmOpts?: any;
   perlinOpts?: { scale?: number; amplitude?: number }[];
   onInit?: (ref: any) => void;

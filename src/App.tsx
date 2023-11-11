@@ -2,13 +2,13 @@ import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import Planet from "./components/Planet";
 import { Physics, RigidBody } from "@react-three/rapier";
-import { Suspense, useRef, useState } from "react";
+import { Suspense, useState } from "react";
 import { Vector3 } from "three";
 
 function App() {
   const planet = {
     name: "earth",
-    onInit: (ref: any) => (sunRef.current = ref),
+    // onInit: (ref: any) => (sunRef.current = ref),
     ocean: "enabled",
     radius: 16,
     detail: 64,
@@ -25,13 +25,21 @@ function App() {
       { scale: 5, amplitude: 40 },
       { scale: 1, amplitude: 10 },
     ],
-  }
+  };
   const planets = [
-    planet,planet,planet,planet,planet,planet,planet,planet,planet,planet,planet,planet
+    planet,
+    planet,
+    planet,
+    planet,
+    planet,
+    planet,
+    planet,
+    planet,
+    planet,
+    planet,
+    planet,
+    planet,
   ];
-  const sunRef = useRef<any>();
-  const earthRef = useRef<any>();
-  const marsRef = useRef<any>();
   const [canvasSize, setCanvasSize] = useState([
     window.innerWidth,
     window.innerHeight,
