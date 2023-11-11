@@ -26,6 +26,7 @@ function App() {
       { scale: 1, amplitude: 10 },
     ],
   };
+  
   const planets = [
     planet,
     planet,
