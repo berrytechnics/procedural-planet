@@ -1,9 +1,10 @@
 import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { FirstPersonControls, OrbitControls, PointerLockControls } from "@react-three/drei";
 import Planet from "./components/Planet";
 import { Physics, RigidBody } from "@react-three/rapier";
-import { Suspense, useState } from "react";
-import { Vector3 } from "three";
+import { Suspense, useRef, useState } from "react";
+import { Box3, DoubleSide, Vector3 } from "three";
+import Ground from "./components/Ground";
 
 function App() {
   const planet = {
@@ -26,7 +27,7 @@ function App() {
       { scale: 1, amplitude: 10 },
     ],
   };
-  
+
   const planets = [
     planet,
     planet,
@@ -45,36 +46,52 @@ function App() {
     window.innerWidth,
     window.innerHeight,
   ]);
+  const controlRef = useRef<any>();
   window.addEventListener("resize", () => {
     setCanvasSize([window.innerWidth, window.innerHeight]);
   });
+  window.addEventListener('keydown',e=>{
+    switch(e.key) {
+      case 'w':
+        controlRef.current.position.setX(controlRef.current.position.x+1)
+        break;
+      case 'a':
+        controlRef.current.position.setY(controlRef.current.position.y+1)
+        break;
+      case 's':
+        controlRef.current.position.setX(controlRef.current.position.x-1)
+        break;
+      case 'd':
+        controlRef.current.position.setY(controlRef.current.position.y-1)
+        break;
+    }
+    // controlRef.current.position.setX(controlRef.current.position.x -1)
+  });
   return (
     <div style={{ width: canvasSize[0], height: canvasSize[1] }}>
-      <Canvas camera={{ position: [0, 0, 150], near: 1, far: 1000000 }}>
+      <Canvas
+        camera={{
+          // lookAt: () => new Vector3(0, 0, 0),
+          position: [0, 20, 10],
+          near: 1,
+          far: 1000000,
+        }}
+      >
         <Suspense>
-          <directionalLight
-            color="#ffffff"
-            intensity={1}
-            position={[-100, 100, 80]}
-          />
-          <ambientLight intensity={0.2} />
-          <Physics gravity={[0, 0, 0]}>
-            {planets.map((planet, i) => {
-              const position = new Vector3(i * 50, 0, 0);
-              return (
-                <RigidBody
-                  position={position}
-                  angularVelocity={[0, 0, 0]}
-                  linearVelocity={[0, 0, 0]}
-                >
-                  <Planet {...planet} />
-                </RigidBody>
-              );
-            })}
+          <Physics gravity={[0, -9.81, 0]}>
+            <ambientLight intensity={.2} />
+            <directionalLight intensity={1} position={[0,20,10]} />
+            <RigidBody colliders="trimesh" lockTranslations>
+              <Ground />
+            </RigidBody>
+            <RigidBody>
+              <mesh ref={controlRef} position={[0, 50, 0]}>
+                <sphereGeometry />
+                <meshPhongMaterial color="grey" />
+              </mesh>
+            </RigidBody>
+            <PointerLockControls />
           </Physics>
-          {/* <Stars speed={0.02} /> */}
-          <OrbitControls />
-          {/* <PointerLockControls /> */}
         </Suspense>
       </Canvas>
     </div>

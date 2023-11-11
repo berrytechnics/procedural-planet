@@ -10,7 +10,7 @@ function Ground ()
   useEffect( () => Terrain.generatePerlinTerrain( meshRef, AMPLITUDE ), [] )
   return ( <mesh ref={ meshRef } rotation-x={ Math.PI / 2 } >
     <planeGeometry args={ [ 512, 512, 64, 64 ] } />
-    <meshStandardMaterial color="#C2B280" side={ DoubleSide } />
+    <meshPhongMaterial color="#C2B280" side={ DoubleSide } />
   </mesh> )
 }
 
