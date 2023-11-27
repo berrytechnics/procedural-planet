@@ -1,5 +1,5 @@
 import { useFrame, useLoader, useThree } from "@react-three/fiber";
-import { FlyControls, Stars } from "@react-three/drei";
+import { FlyControls, OrbitControls, Stars } from "@react-three/drei";
 import Planet from "./components/Planet";
 import { Suspense } from "react";
 import { TextureLoader, Vector3 } from "three";
@@ -30,19 +30,23 @@ function App() {
       ],
     },
   ];
-  const terrain = useLoader(TextureLoader, "/terrain.jpg");
+  const terrain = useLoader(TextureLoader, [
+    "/textures/map.jpg",
+    "/textures/normal.jpg",
+  ]);
   useThree(({ camera }) => {
     camera.position.z = planets[0].radius * 2;
+    camera.lookAt(0, 0, 0);
   });
   useFrame((_, delta) => Bodies.tick(delta));
   return (
     <Suspense fallback={<h1 style={{ color: "red" }}>LOADING...</h1>}>
       <directionalLight
         color="#ffffff"
-        intensity={1}
+        intensity={2}
         position={[-100, 100, 80]}
       />
-      <ambientLight intensity={0.2} />
+      <ambientLight intensity={0.5} />
       {planets.map((planet, i) => (
         <Planet
           key={i}
@@ -51,8 +55,9 @@ function App() {
           last={i + 1 === planets.length ? true : false}
         />
       ))}
-      <Stars speed={0.02} />
-      <FlyControls rollSpeed={0.1} movementSpeed={1} />
+      {/* <Stars speed={0.02} /> */}
+      {/* <FlyControls rollSpeed={0.1} movementSpeed={1} /> */}
+      <OrbitControls />
     </Suspense>
   );
 }

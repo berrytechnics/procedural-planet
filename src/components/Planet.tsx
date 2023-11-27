@@ -10,7 +10,7 @@ export default function Planet(props: {
   last: boolean;
   name?: string;
   radius: number;
-  terrain?: Texture;
+  terrain?: Texture[];
   detail: number;
   color?: string;
   ocean?: string;
@@ -32,6 +32,11 @@ export default function Planet(props: {
     {
       props.fbmOpts && Terrain.generateFBM3DTerrian(planetRef, props.fbmOpts);
     }
+    {
+      props?.terrain?.[0].offset?.set?.(1,1);
+      props?.terrain?.[0].repeat?.set?.(1,1);
+      planetRef.current.geometry.normalizeNormals();
+    }
     Terrain.generate3DTerrainColor(planetRef, oceanRef);
     Bodies.addBody({
       name: props.name,
@@ -51,13 +56,11 @@ export default function Planet(props: {
         args={[undefined, undefined, props.count ?? 1]}
         name={props.name ? `${props.name}_planet` : undefined}
       >
-        {/* <sphereGeometry args={[props.radius, props.detail, props.detail]} /> */}
         <icosahedronGeometry args={[props.radius, props.detail * 4]} />
-        <meshPhongMaterial
-          map={props.terrain}
-          shininess={0.2}
+        <meshStandardMaterial
+          map={props?.terrain?.[0]}
+          normalMap={props?.terrain?.[1]}
           vertexColors
-          color={props.color}
         />
       </instancedMesh>
       {props.ocean === "enabled" && (

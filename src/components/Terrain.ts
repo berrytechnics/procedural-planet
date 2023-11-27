@@ -1,5 +1,5 @@
 import { Perlin, FBM } from "three-noise";
-import { BufferAttribute, Color, Vector2, Vector3 } from "three";
+import { BufferAttribute, Color, Vector3 } from "three";
 const defaultOptions = {
   amplitude: 1,
   scale: 3,

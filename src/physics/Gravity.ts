@@ -1,10 +1,5 @@
 import { Vector3 } from "three";
-<<<<<<< Updated upstream:src/components/Gravity.ts
-
-import { bodies } from "./Bodies";
-=======
 import { bodies } from "../components/Bodies";
->>>>>>> Stashed changes:src/physics/Gravity.ts
 const G = 1;
 const Gravity = {
   calculateForce: (mass1: number, mass2: number, distance: number) => {
