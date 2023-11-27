@@ -1,11 +1,6 @@
 import { useLayoutEffect, useRef } from "react";
 import Terrain from "./Terrain";
-<<<<<<< Updated upstream
-import { useFrame } from "@react-three/fiber";
-import { Vector3 } from "three";
-=======
 import { Texture, Vector3 } from "three";
->>>>>>> Stashed changes
 import { Bodies } from "./Bodies";
 
 export default function Planet(props: {
@@ -56,10 +51,6 @@ export default function Planet(props: {
         args={[undefined, undefined, props.count ?? 1]}
         name={props.name ? `${props.name}_planet` : undefined}
       >
-<<<<<<< Updated upstream
-        <icosahedronGeometry args={[props.radius, props.detail]} />
-        <meshPhongMaterial shininess={0.2} vertexColors color={props.color} />
-=======
         {/* <sphereGeometry args={[props.radius, props.detail, props.detail]} /> */}
         <icosahedronGeometry args={[props.radius, props.detail * 4]} />
         <meshPhongMaterial
@@ -68,7 +59,6 @@ export default function Planet(props: {
           vertexColors
           color={props.color}
         />
->>>>>>> Stashed changes
       </instancedMesh>
       {props.ocean === "enabled" && (
         <instancedMesh
