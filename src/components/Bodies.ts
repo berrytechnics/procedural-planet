@@ -1,8 +1,15 @@
+<<<<<<< Updated upstream
 import Collision from "./Collision";
 import Gravity from "./Gravity";
 import Terrain from "./Terrain";
 
 const bodies = new Map();
+=======
+import { AnyObject } from "three/examples/jsm/nodes/Nodes.js";
+import Collision from "../physics/Collision";
+import Gravity from "../physics/Gravity";
+const bodies = new Map<string, AnyObject>();
+>>>>>>> Stashed changes
 const Bodies = {
   addBody: (body: any) => {
     bodies.set(body.name, body)

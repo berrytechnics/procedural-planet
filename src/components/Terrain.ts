@@ -154,6 +154,5 @@ const Terrain = {
     geometry.attributes.color.needsUpdate = true;
     return;
   },
-
 };
 export default Terrain;
