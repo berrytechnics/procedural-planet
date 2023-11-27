@@ -15,3 +15,22 @@ This is the beginning of a galaxy-scale webGL-based space game. The `Planet` com
 - Physics simulation
 - `Star` component
 - Player controller
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#### Notes
+
+* force is the mass of the first body times the mass of the second body divided by the square of the distance between the two bodies.

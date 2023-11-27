@@ -1,6 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useLayoutEffect, useRef } from "react";
 import Terrain from "./Terrain";
-import { useFrame } from "@react-three/fiber";
 import { Vector3 } from "three";
 import { Bodies } from "./Bodies";
 
@@ -34,7 +34,6 @@ export default function Planet(props: {
     }
     Terrain.generate3DTerrainColor(planetRef, oceanRef);
     Bodies.addBody({
-      name: props.name,
       ref: groupRef,
       velocity: props.initialVelocity,
       ...props,
@@ -51,7 +50,8 @@ export default function Planet(props: {
         args={[undefined, undefined, props.count ?? 1]}
         name={props.name ? `${props.name}_planet` : undefined}
       >
-        <icosahedronGeometry args={[props.radius, props.detail]} />
+        {/* <sphereGeometry args={[props.radius, props.detail, props.detail]} /> */}
+        <icosahedronGeometry args={[props.radius, props.detail*4]} />
         <meshPhongMaterial shininess={0.2} vertexColors color={props.color} />
       </instancedMesh>
       {props.ocean === "enabled" && (

@@ -1,4 +1,3 @@
-import {bodies} from "./Bodies";
 const Collision = {
     detectCollisions: () => {}
 }

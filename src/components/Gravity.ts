@@ -1,5 +1,4 @@
 import { Vector3 } from "three";
-
 import { bodies } from "./Bodies";
 const G = 1;
 const Gravity = {
@@ -25,12 +24,12 @@ const Gravity = {
           const newVelocity = body2.velocity
             .clone()
             .addScaledVector(direction, force);
-        //   body2.velocity = newVelocity;
-        //   body2.ref.current.position.x = newVelocity.x;
-        //   body2.ref.current.position.y = newVelocity.y;
-        //   body2.ref.current.position.z = newVelocity.z;
-        //   body2.ref.current.position.needsUpdate = true;
-        //   bodies.set(body2.name, body2);
+          body2.velocity = newVelocity;
+          body2.ref.current.position.x = newVelocity.x;
+          body2.ref.current.position.y = newVelocity.y;
+          body2.ref.current.position.z = newVelocity.z;
+          body2.ref.current.position.needsUpdate = true;
+          bodies.set(body2.name, body2);
         }
       }
     }
