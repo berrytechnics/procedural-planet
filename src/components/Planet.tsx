@@ -1,20 +1,27 @@
 import { useLayoutEffect, useRef } from "react";
 import Terrain from "./Terrain";
 import { Texture, Vector3 } from "three";
-import { Bodies } from "./Bodies";
-
+import { Bodies } from "../physics/Bodies";
 export default function Planet(props: {
-  key?: any;
+  key?: number | string;
   count?: number;
   mass: number;
   last: boolean;
   name?: string;
   radius: number;
+  static?: boolean;
   terrain?: Texture[];
   detail: number;
   color?: string;
   ocean?: string;
-  fbmOpts?: any;
+  fbmOpts?: {
+    amplitude: number;
+    scale: number;
+    octaves: number;
+    persistance: number;
+    lacunarity: number;
+    redistribution: number;
+  };
   position: Vector3;
   initialVelocity: Vector3;
   perlinOpts?: { scale?: number; amplitude?: number }[];
@@ -32,12 +39,8 @@ export default function Planet(props: {
     {
       props.fbmOpts && Terrain.generateFBM3DTerrian(planetRef, props.fbmOpts);
     }
-    {
-      props?.terrain?.[0].offset?.set?.(1,1);
-      props?.terrain?.[0].repeat?.set?.(1,1);
-      planetRef.current.geometry.normalizeNormals();
-    }
     Terrain.generate3DTerrainColor(planetRef, oceanRef);
+    planetRef.current.geometry.computeBoundingSphere();
     Bodies.addBody({
       name: props.name,
       ref: groupRef,
@@ -57,11 +60,7 @@ export default function Planet(props: {
         name={props.name ? `${props.name}_planet` : undefined}
       >
         <icosahedronGeometry args={[props.radius, props.detail * 4]} />
-        <meshStandardMaterial
-          map={props?.terrain?.[0]}
-          normalMap={props?.terrain?.[1]}
-          vertexColors
-        />
+        <meshPhongMaterial vertexColors shininess={0.5} />
       </instancedMesh>
       {props.ocean === "enabled" && (
         <instancedMesh

@@ -1,4 +1,5 @@
 import { AnyObject } from "three/examples/jsm/nodes/Nodes.js";
+import Gravity from "./Gravity";
 const bodies = new Map<string, AnyObject>();
 const Bodies = {
   addBody: (body: any) => {
@@ -9,8 +10,7 @@ const Bodies = {
   updateBody: (name: string, body: any) => bodies.set(name, body),
   tick: (delta: number) => {
     for (const [name, body] of bodies) {
-      // Collision.detectCollisions();
-      // Gravity.applyForces();
+      Gravity.applyForces(name, body, delta);
     }
   },
 };
