@@ -1,12 +1,15 @@
 import { useLayoutEffect, useRef } from "react";
 import Terrain from "./Terrain";
-import { Texture, Vector3 } from "three";
+import { Vector3 } from "@react-three/fiber";
+import { Texture } from "three";
 import { Bodies } from "../physics/Bodies";
+import { useFrame } from "@react-three/fiber";
 export default function Planet(props: {
   key?: number | string;
   count?: number;
   mass: number;
   last: boolean;
+  rotation?: number;
   name?: string;
   radius: number;
   static?: boolean;
@@ -48,6 +51,9 @@ export default function Planet(props: {
       ...props,
     });
   }, [props]);
+  useFrame(
+    (_, delta) => (groupRef.current.rotation.y += delta * (props.rotation ?? 0))
+  );
   return (
     <group
       name={props.name ? `${props.name}_group` : undefined}

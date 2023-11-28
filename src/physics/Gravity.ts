@@ -9,7 +9,7 @@ const Gravity = {
     distance: number,
     delta: number
   ) => {
-    return ((G * mass1 * mass2) / Math.pow(distance, 2)) * delta;
+    return G * ((mass1 * mass2) / Math.pow(distance, 2)) * delta;
   },
   applyForces: (name: string, body: AnyObject, delta: number) => {
     for (const [name2, body2] of bodies) {
