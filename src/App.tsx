@@ -1,5 +1,5 @@
-import { useFrame, useThree } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { Loader, OrbitControls } from "@react-three/drei";
 import Planet from "./components/Planet";
 import { Suspense } from "react";
 import { Vector3 } from "three";
@@ -72,7 +72,6 @@ function App() {
         { scale: 40, amplitude: 0.5 },
       ],
     },
-
   ];
   useThree(({ camera }) => {
     camera.position.set(0, 1200, 0);
@@ -80,22 +79,25 @@ function App() {
   });
   useFrame((_, delta) => Bodies.tick(delta));
   return (
-    <Suspense fallback={<h1 style={{ color: "red" }}>LOADING...</h1>}>
-      <directionalLight
-        color="#ffffff"
-        intensity={2}
-        position={[-100, 100, 80]}
-      />
-      <ambientLight intensity={0.25} />
-      {planets.map((planet, i) => (
-        <Planet
-          key={i}
-          {...planet}
-          last={i + 1 === planets.length ? true : false}
-        />
-      ))}
-      <OrbitControls />
-    </Suspense>
+    <>
+        <Suspense fallback={null}>
+          <directionalLight
+            color="#ffffff"
+            intensity={2}
+            position={[-100, 100, 80]}
+          />
+          <ambientLight intensity={0.25} />
+          {planets.map((planet, i) => (
+            <Planet
+              key={i}
+              {...planet}
+              last={i + 1 === planets.length ? true : false}
+            />
+          ))}
+          <OrbitControls />
+        </Suspense>
+      <Loader />
+    </>
   );
 }
 
