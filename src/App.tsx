@@ -55,7 +55,7 @@ function App() {
     },
   ];
   useThree(({ camera }) => {
-    camera.position.set(0, 1200, 0);
+    camera.position.set(0, 500, 0);
     camera.lookAt(0, 0, 0);
   });
   useFrame((_, delta) => Bodies.tick(delta));
