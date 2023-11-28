@@ -10,8 +10,6 @@ The Procedural Planet project is a demonstration of procedural content generatio
 
 - **Procedural Terrain Generation**: Utilizes algorithms to create diverse landscapes with varying elevations, biomes, and geological features.
 - **Dynamic Texturing**: Generates textures for different terrain types such as grasslands, deserts, snow-capped mountains, and more.
-<!-- - **Atmospheric Effects**: Simulates atmospheric scattering and rendering effects for a realistic look and feel. -->
-<!-- - **Interactive Visualization**: Allows for exploration and interaction with the generated planets through a user-friendly interface. -->
 
 ## Usage
 
