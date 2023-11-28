@@ -1,4 +1,4 @@
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
 import { Loader, OrbitControls } from "@react-three/drei";
 import Planet from "./components/Planet";
 import { Suspense } from "react";
