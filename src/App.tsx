@@ -36,7 +36,7 @@ function App() {
       mass: 1,
       detail: 8,
       color: "white",
-      initialVelocity: new Vector3(0,0,1),
+      initialVelocity: new Vector3(0,0,1.25),
       position: new Vector3(50, 0, 0),
       fbmOpts: {
         amplitude: 0.5,
