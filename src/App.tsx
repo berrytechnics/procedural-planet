@@ -32,6 +32,27 @@ function App() {
     },
     {
       name: "moon",
+      radius: 8,
+      mass: 200,
+      detail: 8,
+      color: "white",
+      initialVelocity: new Vector3(0, 0, -2.6),
+      position: new Vector3(-300, 0, 0),
+      fbmOpts: {
+        amplitude: 0.5,
+        scale: 0.2,
+        octaves: 24,
+        persistance: 0.1,
+        lacunarity: 5,
+        redistribution: 2,
+      },
+      perlinOpts: [
+        { scale: 15, amplitude: 2 },
+        { scale: 40, amplitude: 0.5 },
+      ],
+    },
+    {
+      name: "moon_2",
       radius: 4,
       mass: 100,
       detail: 8,
@@ -51,9 +72,10 @@ function App() {
         { scale: 40, amplitude: 0.5 },
       ],
     },
+
   ];
   useThree(({ camera }) => {
-    camera.position.set(0, 500, 0);
+    camera.position.set(0, 1200, 0);
     camera.lookAt(0, 0, 0);
   });
   useFrame((_, delta) => Bodies.tick(delta));
