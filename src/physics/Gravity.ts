@@ -11,26 +11,27 @@ const Gravity = {
   ) => {
     return G * ((mass1 * mass2) / Math.pow(distance, 2)) * delta;
   },
-  applyForces: (name: string, body: AnyObject, delta: number) => {
+  applyForces: (name1: string, bpdy1: AnyObject, delta: number) => {
+    // Compare body 1 to all other bodies.
     for (const [name2, body2] of bodies) {
-      if (name !== name2 && !body2.static) {
-        const b1p = body.ref.current.children[0].getWorldPosition(
+      if (name1 !== name2 && !body2.static) {
+        // Get world position of both bodies.
+        const body1Position = bpdy1.ref.current.children[0].getWorldPosition(
           new Vector3()
         );
-        const b2p = body2.ref.current.children[0].getWorldPosition(
+        const body2Position = body2.ref.current.children[0].getWorldPosition(
           new Vector3()
         );
-        const distance = b1p.distanceTo(b2p);
-
-        const direction = new Vector3().subVectors(b2p, b1p).normalize();
+        // Calculate applied force.
+        const distance = body1Position.distanceTo(body2Position);
+        const direction = new Vector3().subVectors(body2Position, body1Position).normalize();
         const force = Gravity.calculateForce(
-          body.mass,
+          bpdy1.mass,
           body2.mass,
           distance,
           delta
         );
-
-        // apply force to body2's velocity.
+        // Apply force to body2's velocity.
         const newVelocity = body2.velocity
           .clone()
           .addScaledVector(direction, force);
