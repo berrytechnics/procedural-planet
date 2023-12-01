@@ -1,7 +1,6 @@
 import { AnyObject } from "three/examples/jsm/nodes/Nodes.js";
 import Gravity from "./Gravity";
 import Collision from "./Collision";
-import { Vector3 } from "three";
 const Bodies = {
   bodies: new Map<string, AnyObject>(),
   addBody: (body: AnyObject) => {
@@ -17,10 +16,15 @@ const Bodies = {
           const collision = Collision.detectCollision(body2, body1);
           if (collision) {
             if (body1.name == "Sol" || body2.name == "Sol") {
-              body1.velcity = body2.velocity = new Vector3(0, 0, 0);
+              const notSun = body1.name == "Sol" ? body2 : body1;
+              notSun.ref.current.visible = false;
             } else {
-              body2.velocity.reflect(body1.velocity.normalize().negate().multiplyScalar(.2))
-              body1.velocity.reflect(body2.velocity.normalize().negate().multiplyScalar(.2))
+              body2.velocity.reflect(
+                body1.velocity.normalize().negate().multiplyScalar(0.2)
+              );
+              body1.velocity.reflect(
+                body2.velocity.normalize().negate().multiplyScalar(0.2)
+              );
             }
           } else Gravity.applyForce(body1, body2, delta);
         }

@@ -35,17 +35,35 @@ function App() {
           mass={4}
           size={8}
           detail={64}
-          velocity={new Vector3(0, 0, 0.4)}
-          position={new Vector3(100, 0, 0)}
-          rotation={.01}
+          velocity={new Vector3(0, 0, 0.3)}
+          position={new Vector3(140, 0, 0)}
+          rotation={0.01}
+        />
+        <One
+          name="extra"
+          mass={3}
+          size={6}
+          detail={64}
+          velocity={new Vector3(0, 0, 0.25)}
+          position={new Vector3(120, 0, 0)}
+          rotation={0.01}
+        />
+        <One
+          name="extr2"
+          mass={6}
+          size={8}
+          detail={64}
+          velocity={new Vector3(0, 0, -0.4)}
+          position={new Vector3(-80, 0, 0)}
+          rotation={0.01}
         />
         <Two
           mass={5}
           size={16}
           detail={64}
-          velocity={new Vector3(0, 0, 0)}
-          position={new Vector3(-450, 0, 0)}
-          rotation={.008}
+          velocity={new Vector3(0, 0, -0.2)}
+          position={new Vector3(-250, 0, 0)}
+          rotation={0.008}
         />
         <OrbitControls />
       </Suspense>
