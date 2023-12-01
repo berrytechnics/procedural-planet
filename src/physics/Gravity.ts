@@ -1,7 +1,7 @@
 import { Vector3 } from "three";
 import RigidBodies from ".";
 import { AnyObject } from "three/examples/jsm/nodes/Nodes.js";
-const G = 1;
+const G = .3;
 const Gravity = {
   calculateForce: (
     mass1: number,

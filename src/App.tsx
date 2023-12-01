@@ -5,11 +5,12 @@ import Physics from "./Physics";
 import Star from "./Bodies/Star";
 import One from "./Bodies/One";
 import Two from "./Bodies/Two";
+import Three from "./Bodies/Three";
 import { Vector3 } from "three";
 
 function App() {
   useThree(({ camera }) => {
-    camera.position.set(0, 800, 0);
+    camera.position.set(0, 2000, 0);
     camera.lookAt(0, 0, 0);
   });
   useFrame((_, delta) => Physics.tick(delta));
@@ -25,45 +26,36 @@ function App() {
         <Star
           static
           name="Sol"
-          mass={1000}
+          mass={3000}
           size={32}
           detail={64}
           velocity={new Vector3(0, 0, 0)}
           rotation={0.005}
         />
         <One
-          mass={4}
+          mass={40}
           size={8}
           detail={64}
-          velocity={new Vector3(0, 0, 0.3)}
+          velocity={new Vector3(0, 0, 1.5)}
           position={new Vector3(140, 0, 0)}
           rotation={0.01}
         />
-        <One
-          name="extra"
-          mass={3}
-          size={6}
-          detail={64}
-          velocity={new Vector3(0, 0, 0.25)}
-          position={new Vector3(120, 0, 0)}
-          rotation={0.01}
-        />
-        <One
-          name="extr2"
-          mass={6}
-          size={8}
-          detail={64}
-          velocity={new Vector3(0, 0, -0.4)}
-          position={new Vector3(-80, 0, 0)}
-          rotation={0.01}
-        />
+
         <Two
-          mass={5}
+          mass={50}
           size={16}
           detail={64}
-          velocity={new Vector3(0, 0, -0.2)}
+          velocity={new Vector3(0, 0, -1.2)}
           position={new Vector3(-250, 0, 0)}
           rotation={0.008}
+        />
+        <Three
+          mass={150}
+          size={24}
+          detail={64}
+          velocity={new Vector3(0, 0, -1.1)}
+          position={new Vector3(-1200, 0, 0)}
+          rotation={0.05}
         />
         <OrbitControls />
       </Suspense>

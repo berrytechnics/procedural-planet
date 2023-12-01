@@ -19,12 +19,7 @@ const Bodies = {
               const notSun = body1.name == "Sol" ? body2 : body1;
               notSun.ref.current.visible = false;
             } else {
-              body2.velocity.reflect(
-                body1.velocity.normalize().negate().multiplyScalar(0.2)
-              );
-              body1.velocity.reflect(
-                body2.velocity.normalize().negate().multiplyScalar(0.2)
-              );
+              // Collide planets here
             }
           } else Gravity.applyForce(body1, body2, delta);
         }
