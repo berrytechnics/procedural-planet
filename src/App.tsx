@@ -4,11 +4,12 @@ import { Suspense } from "react";
 import Physics from "./Physics";
 import Star from "./Bodies/Star";
 import One from "./Bodies/One";
+import Two from "./Bodies/Two";
 import { Vector3 } from "three";
 
 function App() {
   useThree(({ camera }) => {
-    // camera.position.set(0, 100, 0);
+    camera.position.set(0, 800, 0);
     camera.lookAt(0, 0, 0);
   });
   useFrame((_, delta) => Physics.tick(delta));
@@ -28,16 +29,22 @@ function App() {
           size={32}
           detail={64}
           velocity={new Vector3(0, 0, 0)}
-          rotation={.2}
+          rotation={0.2}
         />
         <One
           mass={4}
           size={8}
           detail={64}
-          velocity={new Vector3(-.3, 0, 0)}
+          velocity={new Vector3(0, 0, 0.4)}
           position={new Vector3(100, 0, 0)}
         />
-
+        <Two
+          mass={5}
+          size={16}
+          detail={64}
+          velocity={new Vector3(0, 0, -0.1)}
+          position={new Vector3(-450, 0, 0)}
+        />
         <OrbitControls />
       </Suspense>
       <Loader />
