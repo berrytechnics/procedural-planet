@@ -53,8 +53,36 @@ function App() {
           mass={150}
           size={24}
           detail={64}
-          velocity={new Vector3(0, 0, -1.1)}
+          velocity={new Vector3(0, 0, -.5)}
           position={new Vector3(-1200, 0, 0)}
+          rotation={0.05}
+        />
+        <One
+          name="four"
+          mass={40}
+          size={8}
+          detail={64}
+          velocity={new Vector3(0, 0, 1.3)}
+          position={new Vector3(180, 0, 0)}
+          rotation={0.01}
+        />
+
+        <Two
+          name="five"
+          mass={50}
+          size={16}
+          detail={64}
+          velocity={new Vector3(0, 0, -1)}
+          position={new Vector3(-350, 0, 0)}
+          rotation={0.008}
+        />
+        <Three
+          name="six"
+          mass={150}
+          size={24}
+          detail={64}
+          velocity={new Vector3(0, 0, -1)}
+          position={new Vector3(-900, 0, 0)}
           rotation={0.05}
         />
         <OrbitControls />

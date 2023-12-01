@@ -20,6 +20,7 @@ const Bodies = {
               notSun.ref.current.visible = false;
             } else {
               // Collide planets here
+              body1.velocity.reflect(body1.velocity.clone().normalize());
             }
           } else Gravity.applyForce(body1, body2, delta);
         }
