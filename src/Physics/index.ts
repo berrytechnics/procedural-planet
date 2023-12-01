@@ -12,7 +12,7 @@ const Bodies = {
   tick: (delta: number) => {
     Bodies.bodies.forEach((body1) => {
       Bodies.bodies.forEach((body2) => {
-        if (body1 !== body2) {
+        if (body1.name !== body2.name) {
           const collision = Collision.detectCollision(body2, body1);
           if(!collision)Gravity.applyForce(body1, body2, delta);
         }

@@ -34,17 +34,10 @@ function App() {
           mass={4}
           size={8}
           detail={64}
-          velocity={new Vector3(0, 0, .35)}
+          velocity={new Vector3(-.3, 0, 0)}
           position={new Vector3(100, 0, 0)}
         />
-        <One
-        name="two"
-          mass={5}
-          size={12}
-          detail={64}
-          velocity={new Vector3(0, 0, -.35)}
-          position={new Vector3(-200, 0, 0)}
-        />
+
         <OrbitControls />
       </Suspense>
       <Loader />
