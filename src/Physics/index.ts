@@ -1,5 +1,6 @@
 import { AnyObject } from "three/examples/jsm/nodes/Nodes.js";
 import Gravity from "./Gravity";
+import Collision from "./Collision";
 const Bodies = {
   bodies: new Map<string, AnyObject>(),
   addBody: (body: AnyObject) => {
@@ -12,7 +13,8 @@ const Bodies = {
     Bodies.bodies.forEach((body1) => {
       Bodies.bodies.forEach((body2) => {
         if (body1 !== body2) {
-          Gravity.applyForce(body1, body2, delta);
+          const collision = Collision.detectCollision(body2, body1);
+          if(!collision)Gravity.applyForce(body1, body2, delta);
         }
       });
     });

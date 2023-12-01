@@ -12,13 +12,10 @@ const Gravity = {
     return G * ((mass1 * mass2) / Math.pow(distance, 2)) * delta;
   },
   applyForce: (body1: AnyObject, body2: AnyObject, delta: number) => {
+    if (body2.static) return;
     // Get body world positions.
-    const body1Position = body1.ref.current.children[0].getWorldPosition(
-      new Vector3()
-    );
-    const body2Position = body2.ref.current.children[0].getWorldPosition(
-      new Vector3()
-    );
+    const body1Position = body1.ref.current.getWorldPosition(new Vector3());
+    const body2Position = body2.ref.current.getWorldPosition(new Vector3());
     // Calculate applied force.
     const distance = body1Position.distanceTo(body2Position);
     const direction = new Vector3()
@@ -35,7 +32,6 @@ const Gravity = {
       .clone()
       .addScaledVector(direction, force);
     body2.velocity = newVelocity;
-    body2.initialVelocity = newVelocity;
     body2.ref.current.position.x -= newVelocity.x;
     body2.ref.current.position.y -= newVelocity.y;
     body2.ref.current.position.z -= newVelocity.z;

@@ -1,40 +1,33 @@
 import { useLayoutEffect, useRef } from "react";
 import RigidBody from "../Physics";
-import { Vector3, useFrame } from "@react-three/fiber";
-export default function Star(props: {
-  name: string;
+import { Vector3 } from "@react-three/fiber";
+export default function Planet(props: {
+  name?: string;
   mass: number;
   size: number;
   detail: number;
   velocity: Vector3;
-  static?: boolean;
-  rotation?: number;
+  position: Vector3;
 }) {
-  const { name, mass, size, detail, velocity } = props;
+  const { mass, size, detail, velocity } = props;
   const meshRef = useRef<any>();
   useLayoutEffect(() => {
     if (meshRef.current) {
       meshRef.current.geometry.computeBoundingSphere();
       RigidBody.addBody({
-        name: name,
+        name: props.name ?? "One",
         mass: mass,
         size: size,
         detail: detail,
         velocity: velocity,
-        static: props.static ?? false,
         ref: meshRef,
       });
     }
-  }, [detail, name, mass, size, props.static, velocity]);
-  useFrame((_, delta) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y += delta * (props.rotation ?? 1);
-    }
-  });
+  }, [detail, mass, size, props.name, velocity]);
   return (
-    <mesh ref={meshRef}>
+    <mesh position={props.position} ref={meshRef}>
       <sphereGeometry args={[size, detail, detail]} />
-      <meshStandardMaterial wireframe color="orange" />
+      <meshStandardMaterial wireframe color="grey" />
     </mesh>
   );
 }
