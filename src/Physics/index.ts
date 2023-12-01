@@ -19,9 +19,8 @@ const Bodies = {
             if (body1.name == "Sol" || body2.name == "Sol") {
               body1.velcity = body2.velocity = new Vector3(0, 0, 0);
             } else {
-              const normal = new Vector3();
-              body1.velocity.reflect(normal.randomDirection().normalize());
-              body2.velocity.reflect(normal.randomDirection().normalize());
+              body2.velocity.reflect(body1.velocity.normalize().negate().multiplyScalar(.2))
+              body1.velocity.reflect(body2.velocity.normalize().negate().multiplyScalar(.2))
             }
           } else Gravity.applyForce(body1, body2, delta);
         }
