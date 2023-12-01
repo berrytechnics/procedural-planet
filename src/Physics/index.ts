@@ -10,18 +10,24 @@ const Bodies = {
   removeBody: (name: string) => Bodies.bodies.delete(name),
   updateBody: (name: string, body: AnyObject) => Bodies.bodies.set(name, body),
   tick: (delta: number) => {
+    // Compare all bodies to each other.
     Bodies.bodies.forEach((body1) => {
       Bodies.bodies.forEach((body2) => {
+        // If bod1 and body2 are different bodies.
         if (body1.name !== body2.name) {
           const collision = Collision.detectCollision(body2, body1);
+          // Break if collision with invisible body.
+          if (!body1.ref.current.visible || !body2.ref.current.visible) return;
           if (collision) {
-            if (body1.name == "Sol" || body2.name == "Sol") {
-              const notSun = body1.name == "Sol" ? body2 : body1;
-              notSun.ref.current.visible = false;
+            // Remove smaller body and add half of its mass to the other.
+            if (body1.mass > body2.mass) {
+              body1.mass += body2.mass / 2;
+              body2.ref.current.visible = false;
             } else {
-              // Collide planets here
-              body1.velocity.reflect(body1.velocity.clone().normalize());
+              body2.mass += body1.mass / 2;
+              body1.ref.current.visible = false;
             }
+            // Step gravity.
           } else Gravity.applyForce(body1, body2, delta);
         }
       });
