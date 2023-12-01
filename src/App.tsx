@@ -29,7 +29,7 @@ function App() {
           size={32}
           detail={64}
           velocity={new Vector3(0, 0, 0)}
-          rotation={0.2}
+          rotation={0.005}
         />
         <One
           mass={4}
@@ -37,13 +37,15 @@ function App() {
           detail={64}
           velocity={new Vector3(0, 0, 0.4)}
           position={new Vector3(100, 0, 0)}
+          rotation={.01}
         />
         <Two
           mass={5}
           size={16}
           detail={64}
-          velocity={new Vector3(0, 0, -0.1)}
+          velocity={new Vector3(0, 0, 0)}
           position={new Vector3(-450, 0, 0)}
+          rotation={.008}
         />
         <OrbitControls />
       </Suspense>

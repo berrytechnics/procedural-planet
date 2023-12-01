@@ -16,14 +16,14 @@ const Bodies = {
         if (body1.name !== body2.name) {
           const collision = Collision.detectCollision(body2, body1);
           if (collision) {
-            if (body1.name == "Sol")
+            if (body1.name == "Sol" || body2.name == "Sol") {
               body1.velcity = body2.velocity = new Vector3(0, 0, 0);
-            else {
-              body2.velocity.add(body1.velocity);
-              body1.velocity.sub(body2.velocity);
+            } else {
+              const normal = new Vector3();
+              body1.velocity.reflect(normal.randomDirection().normalize());
+              body2.velocity.reflect(normal.randomDirection().normalize());
             }
-          }
-          Gravity.applyForce(body1, body2, delta);
+          } else Gravity.applyForce(body1, body2, delta);
         }
       });
     });

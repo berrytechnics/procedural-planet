@@ -1,6 +1,6 @@
 import { useLayoutEffect, useRef } from "react";
 import RigidBody from "../Physics";
-import { Vector3 } from "@react-three/fiber";
+import { Vector3, useFrame } from "@react-three/fiber";
 export default function Planet(props: {
   name?: string;
   mass: number;
@@ -8,6 +8,7 @@ export default function Planet(props: {
   detail: number;
   velocity: Vector3;
   position: Vector3;
+  rotation?: number;
 }) {
   const { mass, size, detail, velocity } = props;
   const meshRef = useRef<any>();
@@ -24,6 +25,11 @@ export default function Planet(props: {
       });
     }
   }, [detail, mass, size, props.name, velocity]);
+  useFrame((_, delta) => {
+    if (meshRef.current) {
+      meshRef.current.rotation.y += delta * (props.rotation ?? 1);
+    }
+  });
   return (
     <mesh position={props.position} ref={meshRef}>
       <sphereGeometry args={[size, detail, detail]} />
