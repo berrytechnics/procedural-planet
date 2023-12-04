@@ -34,7 +34,7 @@ export default function Star(props: {
   return (
     <mesh ref={meshRef}>
       <sphereGeometry args={[size, detail, detail]} />
-      <meshStandardMaterial wireframe color="orange" />
+      <meshStandardMaterial color="orange" />
     </mesh>
   );
 }

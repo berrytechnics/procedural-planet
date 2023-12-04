@@ -13,7 +13,7 @@ const Bodies = {
     // Compare all bodies to each other.
     Bodies.bodies.forEach((body1) => {
       Bodies.bodies.forEach((body2) => {
-        // If bod1 and body2 are different bodies.
+        // If body1 and body2 are different bodies.
         if (body1.name !== body2.name) {
           const collision = Collision.detectCollision(body2, body1);
           // Break if collision with invisible body.
@@ -22,9 +22,11 @@ const Bodies = {
             // Remove smaller body and add half of its mass to the other.
             if (body1.mass > body2.mass) {
               body1.mass += body2.mass / 2;
+              body2.mass = 0;
               body2.ref.current.visible = false;
             } else {
               body2.mass += body1.mass / 2;
+              body1.mass = 0;
               body1.ref.current.visible = false;
             }
             // Step gravity.

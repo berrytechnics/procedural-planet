@@ -33,7 +33,7 @@ export default function Planet(props: {
   return (
     <mesh position={props.position} ref={meshRef}>
       <sphereGeometry args={[size, detail, detail]} />
-      <meshStandardMaterial wireframe color="grey" />
+      <meshStandardMaterial color="white" />
     </mesh>
   );
 }

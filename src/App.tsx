@@ -1,65 +1,63 @@
 import { useFrame, useThree } from "@react-three/fiber";
-import { Loader, OrbitControls } from "@react-three/drei";
-import { Suspense } from "react";
+import { OrbitControls } from "@react-three/drei";
 import Physics from "./Physics";
 import Star from "./Bodies/Star";
 import One from "./Bodies/One";
-import Two from "./Bodies/Two";
-import Three from "./Bodies/Three";
 import { Vector3 } from "three";
+import { AnyObject } from "three/examples/jsm/nodes/Nodes.js";
+
+import {
+  EffectComposer,
+  Bloom,
+  ToneMapping,
+} from "@react-three/postprocessing";
+import { ToneMappingMode } from "postprocessing";
 
 function App() {
   useThree(({ camera }) => {
-    camera.position.set(0, 2000, 0);
+    camera.position.set(0, 10000, 0);
     camera.lookAt(0, 0, 0);
   });
   useFrame((_, delta) => Physics.tick(delta));
   return (
     <>
-      <Suspense fallback={null}>
-        <directionalLight
-          color="#ffffff"
-          intensity={2}
-          position={[-100, 100, 80]}
-        />
-        <ambientLight intensity={0.25} />
-        <Star
-          static
-          name="Sol"
-          mass={3000}
-          size={32}
-          detail={64}
-          velocity={new Vector3(0, 0, 0)}
-          rotation={0.005}
-        />
+      <directionalLight position={[0, 0, -1000]} />
+      <ambientLight intensity={0.1} />
+      <EffectComposer disableNormalPass>
+        <Bloom mipmapBlur luminanceThreshold={1} levels={8} intensity={40} />
+        <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
+      </EffectComposer>
+      <Star
+        static
+        name="Sol"
+        mass={100000}
+        size={1024}
+        detail={64}
+        velocity={new Vector3(0, 0, 0)}
+        rotation={0.005}
+      />
+      {[
+        {
+          name: "1",
+          mass: 1000008 * 0.01,
+          size: 128,
+          detail: 64,
+          velocity: new Vector3(0, 0, 120),
+          position: new Vector3(5000, 0, 0),
+          rotation: 0.01,
+        },
+      ].map((planet: AnyObject) => (
         <One
-          mass={40}
-          size={8}
-          detail={64}
-          velocity={new Vector3(0, 0, 1.5)}
-          position={new Vector3(140, 0, 0)}
-          rotation={0.01}
+          name={planet.name}
+          mass={planet.mass}
+          size={planet.size}
+          detail={planet.detail}
+          velocity={planet.velocity}
+          position={planet.position}
+          rotation={planet.rotation}
         />
-
-        <Two
-          mass={50}
-          size={16}
-          detail={64}
-          velocity={new Vector3(0, 0, -1.2)}
-          position={new Vector3(-250, 0, 0)}
-          rotation={0.008}
-        />
-        <Three
-          mass={150}
-          size={24}
-          detail={64}
-          velocity={new Vector3(0, 0, -.6)}
-          position={new Vector3(-1200, 0, 0)}
-          rotation={0.05}
-        />
-        <OrbitControls />
-      </Suspense>
-      <Loader />
+      ))}
+      <OrbitControls />
     </>
   );
 }
