@@ -16,7 +16,7 @@ export default function Planet(props: {
     if (meshRef.current) {
       meshRef.current.geometry.computeBoundingSphere();
       RigidBody.addBody({
-        name: props.name ?? "Two",
+        name: props.name ?? "One",
         mass: mass,
         size: size,
         detail: detail,
@@ -33,7 +33,7 @@ export default function Planet(props: {
   return (
     <mesh position={props.position} ref={meshRef}>
       <sphereGeometry args={[size, detail, detail]} />
-      <meshStandardMaterial wireframe color="grey" />
+      <meshStandardMaterial wireframe color="white" />
     </mesh>
   );
 }

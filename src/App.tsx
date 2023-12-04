@@ -1,7 +1,7 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import Physics from "./Physics";
-import One from "./Bodies/One";
+import One from "./Bodies/Planet";
 import { Vector3 } from "three";
 import { AnyObject } from "three/examples/jsm/nodes/Nodes.js";
 
@@ -29,31 +29,32 @@ function App() {
       {[
         {
           name: "1",
-          mass: 10000,
+          mass: 100000,
           size: 1024,
-          detail: 64,
+          detail: 8,
           velocity: new Vector3(0, 0, 0),
           position: new Vector3(0, 0, 0),
           rotation: 0.01,
         },
         {
           name: "2",
-          mass: 1000,
+          mass: 100,
           size: 512,
-          detail: 64,
-          velocity: new Vector3(0, 0, 40000),
-          position: new Vector3(30000, 0, 0),
+          detail: 8,
+          velocity: new Vector3(0, 0, 3000),
+          position: new Vector3(50000, 0, 0),
           rotation: 0.01,
         },
         {
-          name: "3",
-          mass: 1000,
-          size: 512,
-          detail: 64,
-          velocity: new Vector3(0, 0, -40000),
-          position: new Vector3(-30000, 0, 0),
+          name: "2a",
+          mass: 100,
+          size: 128,
+          detail: 8,
+          velocity: new Vector3(0, 0, 3500),
+          position: new Vector3(48000, 0, 0),
           rotation: 0.01,
         },
+
       ].map((planet: AnyObject) => (
         <One
           key={planet.name}

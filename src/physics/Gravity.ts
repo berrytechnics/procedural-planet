@@ -1,7 +1,7 @@
 import { Vector3, Matrix4 } from "three";
 import { AnyObject } from "three/examples/jsm/nodes/Nodes.js";
 
-const G = 10000000;
+const G = 100000;
 
 const Gravity = {
   calculateForce: (
