@@ -5,12 +5,6 @@ import One from "./Bodies/Planet";
 import { Vector3 } from "three";
 import { AnyObject } from "three/examples/jsm/nodes/Nodes.js";
 
-import {
-  EffectComposer,
-  Bloom,
-  ToneMapping,
-} from "@react-three/postprocessing";
-import { ToneMappingMode } from "postprocessing";
 
 function App() {
   useThree(({ camera }) => {
@@ -20,12 +14,8 @@ function App() {
   useFrame((_, delta) => Physics.tick(delta));
   return (
     <>
-      <directionalLight position={[0, 0, -1000]} />
-      <ambientLight intensity={0.1} />
-      <EffectComposer disableNormalPass>
-        <Bloom mipmapBlur luminanceThreshold={1} levels={8} intensity={40} />
-        <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
-      </EffectComposer>
+      <ambientLight intensity={1} />
+      // initV = Math.sqrt(G*m/r) where m = parent body mass and r = orbit radius (pos.x)
       {[
         {
           name: "1",
@@ -50,7 +40,7 @@ function App() {
           mass: 100,
           size: 128,
           detail: 8,
-          velocity: new Vector3(0, 0, 3500),
+          velocity: new Vector3(0, 0, 3550),
           position: new Vector3(48000, 0, 0),
           rotation: 0.01,
         },
@@ -68,6 +58,8 @@ function App() {
         />
       ))}
       <OrbitControls />
+      {/* <audio src="audio/Frozen_Star.mp3" autoPlay loop /> */}
+
     </>
   );
 }
