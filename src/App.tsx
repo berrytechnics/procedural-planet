@@ -33,7 +33,7 @@ function App() {
         mass={100000}
         size={1024}
         detail={64}
-        velocity={new Vector3(0, 0, -0.00001)}
+        velocity={new Vector3(0, 0, 0)}
         rotation={0.005}
       />
       {[
@@ -42,46 +42,28 @@ function App() {
           mass: 1000,
           size: 512,
           detail: 64,
-          velocity: new Vector3(0, 0, 80),
-          position: new Vector3(20000, 0, 0),
+          velocity: new Vector3(0, 0, 2000),
+          position: new Vector3(50000, 0, 0),
           rotation: 0.01,
         },
         {
           name: "2",
-          mass: 800,
+          mass: 1000,
           size: 512,
           detail: 64,
-          velocity: new Vector3(0, 0, 80),
-          position: new Vector3(30000, 0, 0),
+          velocity: new Vector3(0, 0, -2000),
+          position: new Vector3(-50000, 0, 0),
           rotation: 0.01,
         },
         {
           name: "3",
-          mass: 1400,
+          mass: 100,
           size: 512,
           detail: 64,
-          velocity: new Vector3(0, 0, 70),
-          position: new Vector3(40000, 0, 0),
+          velocity: new Vector3(0, 0, -3000),
+          position: new Vector3(5000, 0, 0),
           rotation: 0.01,
         },
-        {
-          name: "1b",
-          mass: 1000,
-          size: 512,
-          detail: 64,
-          velocity: new Vector3(0, 0, -80),
-          position: new Vector3(-20000, 0, 0),
-          rotation: 0.01,
-        },
-        {
-          name: "2b",
-          mass: 800,
-          size: 512,
-          detail: 64,
-          velocity: new Vector3(0, 0, -80),
-          position: new Vector3(-30000, 0, 0),
-          rotation: 0.01,
-        }
       ].map((planet: AnyObject) => (
         <One
           key={planet.name}
