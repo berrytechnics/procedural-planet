@@ -29,8 +29,9 @@ const Bodies = {
               body1.mass = 0;
               body1.ref.current.visible = false;
             }
-            // Step gravity.
-          } else Gravity.applyForce(body1, body2, delta);
+          }
+          // Step gravity.
+          Gravity.applyForce(body1, body2, delta);
         }
       });
     });

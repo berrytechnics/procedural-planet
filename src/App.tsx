@@ -15,7 +15,7 @@ import { ToneMappingMode } from "postprocessing";
 
 function App() {
   useThree(({ camera }) => {
-    camera.position.set(0, 10000, 0);
+    camera.position.set(0, 100000, 0);
     camera.lookAt(0, 0, 0);
   });
   useFrame((_, delta) => Physics.tick(delta));
@@ -28,26 +28,63 @@ function App() {
         <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
       </EffectComposer>
       <Star
-        static
+        // static
         name="Sol"
         mass={100000}
         size={1024}
         detail={64}
-        velocity={new Vector3(0, 0, 0)}
+        velocity={new Vector3(0, 0, -0.00001)}
         rotation={0.005}
       />
       {[
         {
           name: "1",
-          mass: 1000008 * 0.01,
-          size: 128,
+          mass: 1000,
+          size: 512,
           detail: 64,
-          velocity: new Vector3(0, 0, 120),
-          position: new Vector3(5000, 0, 0),
+          velocity: new Vector3(0, 0, 80),
+          position: new Vector3(20000, 0, 0),
           rotation: 0.01,
         },
+        {
+          name: "2",
+          mass: 800,
+          size: 512,
+          detail: 64,
+          velocity: new Vector3(0, 0, 80),
+          position: new Vector3(30000, 0, 0),
+          rotation: 0.01,
+        },
+        {
+          name: "3",
+          mass: 1400,
+          size: 512,
+          detail: 64,
+          velocity: new Vector3(0, 0, 70),
+          position: new Vector3(40000, 0, 0),
+          rotation: 0.01,
+        },
+        {
+          name: "1b",
+          mass: 1000,
+          size: 512,
+          detail: 64,
+          velocity: new Vector3(0, 0, -80),
+          position: new Vector3(-20000, 0, 0),
+          rotation: 0.01,
+        },
+        {
+          name: "2b",
+          mass: 800,
+          size: 512,
+          detail: 64,
+          velocity: new Vector3(0, 0, -80),
+          position: new Vector3(-30000, 0, 0),
+          rotation: 0.01,
+        }
       ].map((planet: AnyObject) => (
         <One
+          key={planet.name}
           name={planet.name}
           mass={planet.mass}
           size={planet.size}

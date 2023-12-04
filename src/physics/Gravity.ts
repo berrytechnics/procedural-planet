@@ -1,6 +1,6 @@
 import { Vector3 } from "three";
 import { AnyObject } from "three/examples/jsm/nodes/Nodes.js";
-const G = 100;
+const G = 1000;
 const Gravity = {
   calculateForce: (
     mass1: number,
@@ -14,7 +14,7 @@ const Gravity = {
     return G * ((mass1 * mass2) / Math.pow(distance, 2)) * delta;
   },
   applyForce: (body1: AnyObject, body2: AnyObject, delta: number) => {
-    if (body2.static) return;
+    if(!body1||!body2) return;
     // Get body world positions.
     const body1Position = body1.ref.current.getWorldPosition(new Vector3());
     const body2Position = body2.ref.current.getWorldPosition(new Vector3());
@@ -31,7 +31,7 @@ const Gravity = {
     );
     // Forces are equal and opposite according to Newton's third law
     const appliedForce =
-      universalForce * (body2.mass / (body1.mass + body2.mass));
+      universalForce * (body1.mass / (body1.mass + body2.mass));
     // Apply force to body2's velocity.
     const newVelocity = body2.velocity
       .clone()
