@@ -21,12 +21,12 @@ const Bodies = {
           if (collision) {
             // Remove smaller body and add half of its mass to the other.
             if (body1.mass > body2.mass) {
-              body1.mass += body2.mass / 2;
-              body2.mass = 0;
+              // body1.mass += body2.mass / 2;
+              // body2.mass = 0;
               body2.ref.current.visible = false;
             } else {
-              body2.mass += body1.mass / 2;
-              body1.mass = 0;
+              // body2.mass += body1.mass / 2;
+              // body1.mass = 0;
               body1.ref.current.visible = false;
             }
           }

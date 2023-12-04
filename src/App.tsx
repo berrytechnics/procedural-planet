@@ -1,7 +1,6 @@
 import { useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import Physics from "./Physics";
-import Star from "./Bodies/Star";
 import One from "./Bodies/One";
 import { Vector3 } from "three";
 import { AnyObject } from "three/examples/jsm/nodes/Nodes.js";
@@ -27,23 +26,14 @@ function App() {
         <Bloom mipmapBlur luminanceThreshold={1} levels={8} intensity={40} />
         <ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
       </EffectComposer>
-      <Star
-        // static
-        name="Sol"
-        mass={100000}
-        size={1024}
-        detail={64}
-        velocity={new Vector3(0, 0, 0)}
-        rotation={0.005}
-      />
       {[
         {
           name: "1",
-          mass: 1000,
-          size: 512,
+          mass: 10000,
+          size: 1024,
           detail: 64,
-          velocity: new Vector3(0, 0, 2000),
-          position: new Vector3(50000, 0, 0),
+          velocity: new Vector3(0, 0, 0),
+          position: new Vector3(0, 0, 0),
           rotation: 0.01,
         },
         {
@@ -51,17 +41,17 @@ function App() {
           mass: 1000,
           size: 512,
           detail: 64,
-          velocity: new Vector3(0, 0, -2000),
-          position: new Vector3(-50000, 0, 0),
+          velocity: new Vector3(0, 0, 40000),
+          position: new Vector3(30000, 0, 0),
           rotation: 0.01,
         },
         {
           name: "3",
-          mass: 100,
+          mass: 1000,
           size: 512,
           detail: 64,
-          velocity: new Vector3(0, 0, -3000),
-          position: new Vector3(5000, 0, 0),
+          velocity: new Vector3(0, 0, -40000),
+          position: new Vector3(-30000, 0, 0),
           rotation: 0.01,
         },
       ].map((planet: AnyObject) => (
