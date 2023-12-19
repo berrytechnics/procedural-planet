@@ -31,7 +31,6 @@ export default function NovaCelestia() {
 
   return (
     <mesh position={currentAttributes.position} ref={meshRef}>
-      <directionalLight intensity={1} position={[0, 100, 0]} />
       <sphereGeometry
         args={[
           currentAttributes.size,
