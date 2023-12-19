@@ -1,6 +1,4 @@
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
-import Physics from "../Physics";
-
 export default function Effects() {
   return (
     <EffectComposer>
