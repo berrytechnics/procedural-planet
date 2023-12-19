@@ -31,7 +31,7 @@ const Bodies = {
             }
           }
           // Step gravity.
-          Gravity.applyForce(body1, body2, delta);
+          Gravity.applyForce(body1, body2, delta/10);
         }
       });
     });

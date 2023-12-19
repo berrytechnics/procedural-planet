@@ -38,7 +38,7 @@ export default function NovaCelestia() {
           currentAttributes.detail,
         ]}
       />
-      <meshStandardMaterial wireframe color="white" />
+      <meshNormalMaterial wireframe />
     </mesh>
   );
 }

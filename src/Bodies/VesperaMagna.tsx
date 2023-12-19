@@ -7,12 +7,12 @@ export default function VesperaMagna() {
   const meshRef = useRef<any>();
   const currentAttributes = useMemo(() => {
     return {
-      name: "Nova Celestia",
+      name: "Vespera Magna",
       mass: 100,
       size: 256,
       detail: 8,
-      velocity: new Vector3(0, 1, 0),
-      position: new Vector3(8000, 0, 0),
+      velocity: new Vector3(0, 0, 180000),
+      position: new Vector3(30000, 0, 0),
       rotation: 0.05,
       ref: meshRef,
     };
@@ -38,7 +38,7 @@ export default function VesperaMagna() {
           currentAttributes.detail,
         ]}
       />
-      <meshStandardMaterial wireframe color="white" />
+      <meshNormalMaterial wireframe />
     </mesh>
   );
 }
