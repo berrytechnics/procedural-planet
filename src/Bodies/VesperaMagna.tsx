@@ -2,7 +2,6 @@ import { useLayoutEffect, useMemo, useRef } from "react";
 import RigidBody from "../Physics";
 import { useFrame } from "@react-three/fiber";
 import { Vector3 } from "three";
-
 export default function VesperaMagna() {
   const meshRef = useRef<any>();
   const currentAttributes = useMemo(() => {

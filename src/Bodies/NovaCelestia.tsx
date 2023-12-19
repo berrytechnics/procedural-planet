@@ -10,7 +10,7 @@ export default function NovaCelestia() {
       name: "Nova Celestia",
       mass: 100000000,
       size: 2056,
-      detail: 8,
+      detail: 128,
       velocity: new Vector3(10, 0, 0),
       position: new Vector3(0, 0, 0),
       rotation: 0.05,
@@ -31,6 +31,7 @@ export default function NovaCelestia() {
 
   return (
     <mesh position={currentAttributes.position} ref={meshRef}>
+      <directionalLight intensity={1} position={[0, 100, 0]} />
       <sphereGeometry
         args={[
           currentAttributes.size,
@@ -38,7 +39,11 @@ export default function NovaCelestia() {
           currentAttributes.detail,
         ]}
       />
-      <meshNormalMaterial wireframe />
+      <meshStandardMaterial
+        emissive="orange"
+        emissiveIntensity={2}
+        toneMapped={false}
+      />
     </mesh>
   );
 }
