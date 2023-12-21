@@ -3,7 +3,7 @@ import RigidBody from "../Physics";
 import { useFrame } from "@react-three/fiber";
 import { Vector3 } from "three";
 
-export default function NovaCelestia() {
+export default function NovaCelestia(props: { onLoad?: (ref: any) => void }) {
   const meshRef = useRef<any>();
   const currentAttributes = useMemo(() => {
     return {
@@ -19,6 +19,7 @@ export default function NovaCelestia() {
   }, []);
   useLayoutEffect(() => {
     if (meshRef.current) {
+      props.onLoad?.(meshRef.current);
       meshRef.current.geometry.computeBoundingSphere();
       RigidBody.addBody(currentAttributes);
     }
@@ -40,7 +41,7 @@ export default function NovaCelestia() {
       />
       <meshStandardMaterial
         emissive="orange"
-        emissiveIntensity={2}
+        emissiveIntensity={2.5}
         toneMapped={false}
       />
     </mesh>
