@@ -18,7 +18,7 @@ export function Universe() {
     camera.position.set(0, 100000, 0);
     camera.lookAt(0, 0, 0);
   });
-  useFrame((_, delta) => Physics.tick(delta));
+  useFrame((_, delta) => Physics.tick(delta/4));
 
   return (
     <>
@@ -33,8 +33,8 @@ export function Universe() {
         radius={10000000}
         depth={5000}
         count={10000}
-        factor={300000}
-        saturation={1}
+        factor={200000}
+        saturation={0}
         fade
         speed={0.01}
       />

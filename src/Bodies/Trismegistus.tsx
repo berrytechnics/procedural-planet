@@ -37,7 +37,7 @@ export default function Trismegistus() {
           currentAttributes.detail,
         ]}
       />
-      <meshLambertMaterial color={'white'} />
+      <meshStandardMaterial color={'white'} />
     </mesh>
   );
 }

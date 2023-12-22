@@ -37,7 +37,7 @@ export default function VesperaMagna() {
           currentAttributes.detail,
         ]}
       />
-      <meshStandardMaterial color={"white"} />
+      <meshPhongMaterial reflectivity={0} shininess={0} color={"grey"} />
     </mesh>
   );
 }
