@@ -11,7 +11,7 @@ function App() {
   const ref = useRef<any>();
   useHelper(ref, PointLightHelper, 100000, "green");
   useThree(({ camera }) => {
-    camera.position.set(0, 0, 100000);
+    camera.position.set(0, 100000, 0);
     camera.lookAt(0, 0, 0);
   });
   useFrame((_, delta) => Physics.tick(delta));
