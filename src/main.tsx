@@ -4,7 +4,7 @@ import { MutableRefObject, useRef } from "react";
 import { Object3D, Object3DEventMap, PointLightHelper } from "three";
 import { Canvas } from "@react-three/fiber";
 import { useFrame, useThree } from "@react-three/fiber";
-import { OrbitControls, useHelper } from "@react-three/drei";
+import { OrbitControls, Stars, useHelper } from "@react-three/drei";
 import { Bloom, EffectComposer } from "@react-three/postprocessing";
 import Physics from "./Physics";
 import NovaCelestia from "./Bodies/NovaCelestia";
@@ -19,7 +19,7 @@ export function Universe() {
     camera.lookAt(0, 0, 0);
   });
   useFrame((_, delta) => Physics.tick(delta));
-  
+
   return (
     <>
       <EffectComposer>
@@ -29,6 +29,15 @@ export function Universe() {
       <NovaCelestia />
       <VesperaMagna />
       <Trismegistus />
+      <Stars
+        radius={1000000}
+        depth={5000}
+        count={10000}
+        factor={10000}
+        saturation={1}
+        fade
+        speed={0.1}
+      />
       <OrbitControls />
     </>
   );
@@ -36,7 +45,7 @@ export function Universe() {
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <div style={{ width: "100vw", height: "100vh" }}>
-    <Canvas camera={{ near: 1, far: 1000000 }}>
+    <Canvas camera={{ near: 1, far: 10000000 }}>
       <ambientLight intensity={0.01} />
       <Universe />
     </Canvas>
