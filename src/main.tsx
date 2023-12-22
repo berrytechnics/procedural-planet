@@ -30,13 +30,13 @@ export function Universe() {
       <VesperaMagna />
       <Trismegistus />
       <Stars
-        radius={1000000}
+        radius={10000000}
         depth={5000}
         count={10000}
-        factor={10000}
+        factor={300000}
         saturation={1}
         fade
-        speed={0.1}
+        speed={0.01}
       />
       <OrbitControls />
     </>
@@ -45,7 +45,7 @@ export function Universe() {
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <div style={{ width: "100vw", height: "100vh" }}>
-    <Canvas camera={{ near: 1, far: 10000000 }}>
+    <Canvas camera={{ near: .01, far: 100000000 }}>
       <ambientLight intensity={0.01} />
       <Universe />
     </Canvas>
