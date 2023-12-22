@@ -10,7 +10,7 @@ export default function NovaCelestia(props: { onLoad?: (ref: any) => void }) {
       name: "Nova Celestia",
       mass: 100000000,
       size: 2056,
-      detail: 128,
+      detail: 96,
       velocity: new Vector3(10, 0, 0),
       position: new Vector3(0, 0, 0),
       rotation: 0.05,
@@ -31,19 +31,28 @@ export default function NovaCelestia(props: { onLoad?: (ref: any) => void }) {
   });
 
   return (
-    <mesh position={currentAttributes.position} ref={meshRef}>
-      <sphereGeometry
-        args={[
-          currentAttributes.size,
-          currentAttributes.detail,
-          currentAttributes.detail,
-        ]}
-      />
-      <meshStandardMaterial
-        emissive="orange"
-        emissiveIntensity={2.5}
-        toneMapped={false}
-      />
-    </mesh>
+    <>
+      <mesh
+        castShadow={false}
+        receiveShadow={false}
+        position={currentAttributes.position}
+        ref={meshRef}
+      >
+        <sphereGeometry
+          args={[
+            currentAttributes.size,
+            currentAttributes.detail,
+            currentAttributes.detail,
+          ]}
+        />
+        <meshStandardMaterial
+          flatShading
+          emissive="orange"
+          emissiveIntensity={3}
+          toneMapped={true}
+          transparent
+        />
+      </mesh>
+    </>
   );
 }

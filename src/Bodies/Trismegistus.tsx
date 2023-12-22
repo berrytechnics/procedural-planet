@@ -2,16 +2,16 @@ import { useLayoutEffect, useMemo, useRef } from "react";
 import RigidBody from "../Physics";
 import { useFrame } from "@react-three/fiber";
 import { Vector3 } from "three";
-export default function VesperaMagna() {
+export default function Trismegistus() {
   const meshRef = useRef<any>();
   const currentAttributes = useMemo(() => {
     return {
-      name: "Vespera Magna",
-      mass: 100,
-      size: 256,
-      detail: 32,
-      velocity: new Vector3(0, 0, 100000),
-      position: new Vector3(30000, 0, 0),
+      name: "Trismegistus",
+      mass: 1000,
+      size: 512,
+      detail: 96,
+      velocity: new Vector3(0, 0, -300000),
+      position: new Vector3(-60000, 0, 0),
       rotation: 0.05,
       ref: meshRef,
     };
@@ -37,7 +37,7 @@ export default function VesperaMagna() {
           currentAttributes.detail,
         ]}
       />
-      <meshStandardMaterial color={'white'} />
+      <meshLambertMaterial color={'white'} />
     </mesh>
   );
 }
