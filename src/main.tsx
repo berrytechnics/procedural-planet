@@ -1,13 +1,44 @@
-import ReactDOM from "react-dom/client";
-import App from "./App.js";
 import "./index.css";
+import ReactDOM from "react-dom/client";
+import { MutableRefObject, useRef } from "react";
+import { Object3D, Object3DEventMap, PointLightHelper } from "three";
 import { Canvas } from "@react-three/fiber";
+import { useFrame, useThree } from "@react-three/fiber";
+import { OrbitControls, useHelper } from "@react-three/drei";
+import { Bloom, EffectComposer } from "@react-three/postprocessing";
+import Physics from "./Physics";
+import NovaCelestia from "./Bodies/NovaCelestia";
+import VesperaMagna from "./Bodies/VesperaMagna";
+import Trismegistus from "./Bodies/Trismegistus";
+
+export function Universe() {
+  const ref = useRef<MutableRefObject<Object3D<Object3DEventMap>>>(null);
+  useHelper(ref.current, PointLightHelper, 100000, "green");
+  useThree(({ camera }) => {
+    camera.position.set(0, 100000, 0);
+    camera.lookAt(0, 0, 0);
+  });
+  useFrame((_, delta) => Physics.tick(delta));
+  
+  return (
+    <>
+      <EffectComposer>
+        <Bloom luminanceSmoothing={0.9} height={1000} />
+      </EffectComposer>
+      <pointLight intensity={1000000000} distance={10000000} color="white" />
+      <NovaCelestia />
+      <VesperaMagna />
+      <Trismegistus />
+      <OrbitControls />
+    </>
+  );
+}
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <div style={{ width: "100vw", height: "100vh" }}>
-    <Canvas camera={{ position: [0, 0, 150], near: 1, far: 1000000 }}>
+    <Canvas camera={{ near: 1, far: 1000000 }}>
       <ambientLight intensity={0.01} />
-      <App />
+      <Universe />
     </Canvas>
   </div>
 );

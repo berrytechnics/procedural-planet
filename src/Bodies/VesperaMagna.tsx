@@ -1,9 +1,9 @@
 import { useLayoutEffect, useMemo, useRef } from "react";
 import RigidBody from "../Physics";
 import { useFrame } from "@react-three/fiber";
-import { Vector3 } from "three";
+import { Mesh, Vector3 } from "three";
 export default function VesperaMagna() {
-  const meshRef = useRef<any>();
+  const meshRef = useRef<Mesh>(null);
   const currentAttributes = useMemo(() => {
     return {
       name: "Vespera Magna",
@@ -29,7 +29,7 @@ export default function VesperaMagna() {
   });
 
   return (
-    <mesh  position={currentAttributes.position} ref={meshRef}>
+    <mesh position={currentAttributes.position} ref={meshRef}>
       <sphereGeometry
         args={[
           currentAttributes.size,
@@ -37,7 +37,7 @@ export default function VesperaMagna() {
           currentAttributes.detail,
         ]}
       />
-      <meshStandardMaterial color={'white'} />
+      <meshStandardMaterial color={"white"} />
     </mesh>
   );
 }

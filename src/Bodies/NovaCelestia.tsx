@@ -1,10 +1,10 @@
 import { useLayoutEffect, useMemo, useRef } from "react";
 import RigidBody from "../Physics";
 import { useFrame } from "@react-three/fiber";
-import { Vector3 } from "three";
+import { Mesh, Vector3 } from "three";
 
-export default function NovaCelestia(props: { onLoad?: (ref: any) => void }) {
-  const meshRef = useRef<any>();
+export default function NovaCelestia(props: { onLoad?: (ref: Mesh) => void }) {
+  const meshRef = useRef<Mesh>(null);
   const currentAttributes = useMemo(() => {
     return {
       name: "Nova Celestia",
@@ -23,7 +23,7 @@ export default function NovaCelestia(props: { onLoad?: (ref: any) => void }) {
       meshRef.current.geometry.computeBoundingSphere();
       RigidBody.addBody(currentAttributes);
     }
-  }, [currentAttributes]);
+  }, [currentAttributes, props]);
   useFrame((_, delta) => {
     if (meshRef.current) {
       meshRef.current.rotation.y += delta * currentAttributes.rotation;
