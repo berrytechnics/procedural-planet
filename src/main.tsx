@@ -10,6 +10,7 @@ import Physics from "./Physics";
 import NovaCelestia from "./Bodies/NovaCelestia";
 import VesperaMagna from "./Bodies/VesperaMagna";
 import Trismegistus from "./Bodies/Trismegistus";
+import Itokawa from './Bodies/Itokawa';
 
 export function Universe() {
   const ref = useRef<MutableRefObject<Object3D<Object3DEventMap>>>(null);
@@ -27,6 +28,7 @@ export function Universe() {
       </EffectComposer>
       <pointLight intensity={1000000000} distance={10000000} color="white" />
       <NovaCelestia />
+      <Itokawa />
       <VesperaMagna />
       <Trismegistus />
       <Stars
@@ -46,7 +48,7 @@ export function Universe() {
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <div style={{ width: "100vw", height: "100vh" }}>
     <Canvas camera={{ near: .01, far: 100000000 }}>
-      <ambientLight intensity={0.01} />
+      <ambientLight intensity={.01} />
       <Universe />
     </Canvas>
   </div>

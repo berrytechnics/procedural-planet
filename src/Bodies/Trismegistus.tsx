@@ -10,7 +10,7 @@ export default function Trismegistus() {
       mass: 1000,
       size: 512,
       detail: 96,
-      velocity: new Vector3(0, 0, -300000),
+      velocity: new Vector3(0, 0, -200000),
       position: new Vector3(-60000, 0, 0),
       rotation: 0.05,
       ref: meshRef,
